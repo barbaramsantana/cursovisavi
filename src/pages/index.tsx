@@ -1,3 +1,4 @@
 import Index from './Index';
+import SocialIsolation from './SocialIsolation';
 
-export { Index };
+export { Index, SocialIsolation };

@@ -8,6 +8,9 @@ export default createGlobalStyle`
     --color-header-text: #FFFFFF;
     --color-content-background: #FFFFFF;
     --color-content-text: #11183D;
+    --color-content-button-background: #11183D;
+    --color-content-button-background-hover: #1e2a6b;
+    --color-content-button-text: #FFFFFF;
 
     font-size: 60%;
   }
@@ -22,6 +25,16 @@ export default createGlobalStyle`
   body {
     background: var(--color-app-background);
     -webkit-font-smoothing: antialiased;
+  }
+
+  button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
   }
 
   body,

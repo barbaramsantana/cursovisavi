@@ -1,11 +1,31 @@
 import React from 'react';
 
-import { Container } from './styles';
+import { Link } from 'react-router-dom';
+
+import indexImage from '../../assets/index.png';
+
+import {
+  Container,
+  Title,
+  ContainerImage,
+  Image,
+  ContainerButton,
+  ButtonIcon,
+} from './styles';
 
 const Index: React.FC = () => {
   return (
     <Container>
-      <h1> Ola Mundo</h1>
+      <Title>Encontre dados do Covid-19 em Sergipe</Title>
+      <ContainerImage>
+        <Image src={indexImage} alt="Logo de SE" />
+      </ContainerImage>
+      <ContainerButton>
+        <Link to="/socialisolation">
+          Ver Dados
+          <ButtonIcon />
+        </Link>
+      </ContainerButton>
     </Container>
   );
 };
