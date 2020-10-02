@@ -1,0 +1,9 @@
+{
+  "short_name": "visavis",
+  "name": "VISAVISE - UFS",
+  "lang": "pt-BR",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
