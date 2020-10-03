@@ -11,6 +11,8 @@ export default createGlobalStyle`
     --color-content-button-background: #11183D;
     --color-content-button-background-hover: #1e2a6b;
     --color-content-button-text: #FFFFFF;
+    --color-content-button-before-after-enabled: #11183D;
+    --color-content-button-before-after-disabled: #11183D60;
 
     font-size: 60%;
   }

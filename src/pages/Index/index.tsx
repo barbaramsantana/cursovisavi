@@ -21,7 +21,7 @@ const Index: React.FC = () => {
         <Image src={indexImage} alt="Logo de SE" />
       </ContainerImage>
       <ContainerButton>
-        <Link to="/socialisolation">
+        <Link to="/page1">
           Ver Dados
           <ButtonIcon />
         </Link>
