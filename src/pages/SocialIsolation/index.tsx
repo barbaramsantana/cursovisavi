@@ -1,11 +1,15 @@
 import React from 'react';
 
-import { Container } from './styles';
+import { Container, Text } from './styles';
+import MapaSe from './../../components/MapaSe';
 
 const SocialIsolation: React.FC = () => {
   return (
     <Container>
-      <h1> Page 1</h1>
+      <Text>Número de Casos</Text>
+      <MapaSe/>
+      <Text>Número de Óbitos</Text>
+      <MapaSe/>
     </Container>
   );
 };
