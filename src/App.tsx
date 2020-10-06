@@ -16,7 +16,7 @@ import {
 const App: React.FC = () => (
   <Container>
     <Header>
-      <HeaderText>Visavi-SE</HeaderText>
+        <HeaderText>Visavi-SE</HeaderText>
     </Header>
     <Background />
     <Content>

@@ -8,7 +8,7 @@ import { Container, Title } from './styles';
 const Page4: React.FC = () => {
   return (
     <Container>
-      <ChangePage name="before" page="/page4"/>
+      <ChangePage name="before" page="/se/page4"/>
       <ChangePage name="next" />
 
       <Title>Taxa de Isolamento Social</Title>

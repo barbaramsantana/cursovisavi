@@ -17,11 +17,13 @@ const Index: React.FC = () => {
   return (
     <Container>
       <Title>Encontre dados do Covid-19 em Sergipe</Title>
+        <Link to="/se">
       <ContainerImage>
-        <Image src={indexImage} alt="Logo de SE" />
+          <Image src={indexImage} alt="Logo de SE" />
       </ContainerImage>
+        </Link>
       <ContainerButton>
-        <Link to="/page1">
+        <Link to="/se/page1">
           Ver Dados
           <ButtonIcon />
         </Link>

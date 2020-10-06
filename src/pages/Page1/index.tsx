@@ -9,7 +9,7 @@ const Page1: React.FC = () => {
   return (
     <Container>
       <ChangePage name="before" />
-      <ChangePage name="next" page="/page2" />
+      <ChangePage name="next" page="/se/page2" />
 
       <Title>Número de Casos</Title>
       <MapaSe url="arquivo.json"/>

@@ -8,8 +8,8 @@ import { Container, Title } from './styles';
 const Page4: React.FC = () => {
   return (
     <Container>
-      <ChangePage name="before" page="/page3"/>
-      <ChangePage name="next" page="/page5" />
+      <ChangePage name="before" page="/se/page3"/>
+      <ChangePage name="next" page="/se/page5" />
 
       <Title>Casos por Densidade Demográfica</Title>
       <MapaSe url="arquivo.json"/>
