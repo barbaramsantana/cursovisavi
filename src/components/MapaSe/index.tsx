@@ -1,12 +1,29 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect, Component} from 'react';
 import { Map, GeoJSON } from 'react-leaflet';
 
 import mapaData from '../../data/json_geojs-sergipe.json';
 
 import 'leaflet/dist/leaflet.css';
 import { Container, Title } from './styles';
+import Api from './../../Api/api';
 
-const MapaSE: React.FC = () => {
+interface MapaSEProps{
+  url: string;
+}
+const state = {
+  valor: []
+}
+
+const MapaSE: React.FC<MapaSEProps> = (props) => {
+
+  //Apenas para testes de leitura de api
+  class ApiLer extends Component{
+    async componentDidMount(){
+        const response = await Api.get(props.url);
+        console.log(response.data);
+        this.setState({valor: response.data});
+    }
+  }
   const stateStyle = {
     color: '#11183D',
     wheight: 1,

@@ -5,16 +5,16 @@ import { ChangePage, MapaSe } from '../../components';
 
 import { Container, Title } from './styles';
 
-const Page1: React.FC = () => {
+const Page3: React.FC = () => {
   return (
     <Container>
-      <ChangePage name="before" />
-      <ChangePage name="next" page="/page2" />
+      <ChangePage name="before" page="/page2"/>
+      <ChangePage name="next" page="/page4" />
 
-      <Title>Número de Casos</Title>
+      <Title>Taxa de letalidade</Title>
       <MapaSe url="arquivo.json"/>
     </Container>
   );
 };
 
-export default Page1;
+export default Page3;
