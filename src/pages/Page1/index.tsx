@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
-import { ChangePage, MapaSe } from '../../components';
+import { ChangePage, MapaSe} from '../../components';
+import Headerr from '../../components/Headerr/index';
 
 import { Container, Title, Observacao } from './styles';
 
