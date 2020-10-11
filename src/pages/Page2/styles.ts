@@ -21,3 +21,10 @@ export const Title = styled.h1`
 
   margin-bottom: 1rem;
 `;
+export const Observacao = styled.p`
+  font-size: 3rem;
+  text-align: center;
+  color:red;
+
+  margin-bottom: 1rem;
+`;

@@ -25,6 +25,8 @@ export const Container = styled.div`
       'textIndex'
       'imgIndex'
       'imgIndex'
+      'ObsIndex'
+      'imgIndex'
       'dataIndex';
   }
 
@@ -33,6 +35,7 @@ export const Container = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       'textIndex imgIndex'
+      'ObsIndex imgIndex'
       'dataIndex imgIndex';
   }
 `;
@@ -43,6 +46,14 @@ export const Title = styled.h1`
   font-weight: 500;
   font-size: 3.5rem;
   text-align: center;
+`;
+export const Observacao = styled.p`
+  grid-area: ObsIndex;
+
+  font-weight: 250;
+  font-size: 3.5rem;
+  text-align: center;
+  color: red;
 `;
 
 export const ContainerImage = styled.div`

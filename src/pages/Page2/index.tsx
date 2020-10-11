@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ChangePage, MapaSe } from '../../components';
 
-import { Container, Title } from './styles';
+import { Container, Title, Observacao } from './styles';
 
 const Page2: React.FC = () => {
   return (
@@ -11,6 +11,7 @@ const Page2: React.FC = () => {
       <ChangePage name="next" page="/se/page3"  />
 
       <Title>Número de Óbitos</Title>
+      <Observacao>ATENÇÃO: Os valores nos mapas estão em atualização</Observacao>
       <MapaSe url="arquivo.json" />
     </Container>
   );

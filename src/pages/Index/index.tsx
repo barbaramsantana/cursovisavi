@@ -11,12 +11,15 @@ import {
   Image,
   ContainerButton,
   ButtonIcon,
+  Observacao,
 } from './styles';
 
 const Index: React.FC = () => {
   return (
     <Container>
-      <Title>Encontre dados do Covid-19 em Sergipe</Title>
+      <Title>Encontre mapas como os dados do Covid-19 em Sergipe </Title>
+      <Observacao></Observacao>
+      <Observacao>ATENÇÃO: Os valores nos mapas estão em atualização. No momento possuem valores aleatórios.</Observacao>
         <Link to="/se">
       <ContainerImage>
           <Image src={indexImage} alt="Logo de SE" />
@@ -24,7 +27,7 @@ const Index: React.FC = () => {
         </Link>
       <ContainerButton>
         <Link to="/se/page1">
-          Ver Dados
+          Visualizar Mapas
           <ButtonIcon />
         </Link>
       </ContainerButton>

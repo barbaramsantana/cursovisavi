@@ -1,8 +1,30 @@
 import styled from 'styled-components';
 
-import backgroundImage from '../assets/background.svg';
+import backgroundImage from './../../assets/background.svg';
 
 export const Container = styled.div``;
+
+export const Header = styled.header`
+  height: 8rem;
+  width: 100vw;
+
+  display: flex;
+  align-items: center;
+
+  background: var(--color-header-background);
+  color: var(--color-header-text);
+`;
+
+export const HeaderText = styled.a`
+float: left;
+color: white;
+text-align: center;
+padding: 12px;
+text-decoration: none;
+font-size: 18px;
+line-height: 25px;
+border-radius: 4px;
+`;
 
 export const Background = styled.div`
   height: 4.9rem;

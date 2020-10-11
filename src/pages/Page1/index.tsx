@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { ChangePage, MapaSe } from '../../components';
 
-import { Container, Title } from './styles';
+import { Container, Title, Observacao } from './styles';
 
 const Page1: React.FC = () => {
   return (
@@ -12,6 +12,7 @@ const Page1: React.FC = () => {
       <ChangePage name="next" page="/se/page2" />
 
       <Title>Número de Casos</Title>
+      <Observacao>ATENÇÃO: Os valores nos mapas estão em atualização</Observacao>
       <MapaSe url="arquivo.json"/>
     </Container>
   );

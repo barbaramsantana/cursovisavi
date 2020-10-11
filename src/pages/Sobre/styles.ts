@@ -28,3 +28,9 @@ export const Observacao = styled.p`
 
   margin-bottom: 1rem;
 `;
+export const Texto = styled.p`
+  font-size: 3rem;
+  text-align: center;
+
+  margin-bottom: 1rem;
+`;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import { Index, Page1, Page2, Page3, Page4, Page5} from '../pages';
+import { Index, Page1, Page2, Page3, Page4, Page5, QuemSomos, Sobre} from '../pages';
 
 
 const Routes: React.FC = () => (
@@ -13,6 +13,8 @@ const Routes: React.FC = () => (
     <Route path="/se/page3" component={Page3} />
     <Route path="/se/page4" component={Page4} />
     <Route path="/se/page5" component={Page5} />
+    <Route path="/se/sobre" component={Sobre} />
+    <Route path="/se/quemsomos" component={QuemSomos}/>
   </Switch>
 );
 
