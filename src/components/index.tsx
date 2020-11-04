@@ -1,6 +1,6 @@
 import ChangePage from './ChangePage';
-import MapaSe from './MapaSe';
+import Mapa from './Mapa';
 import Headerr from './Headerr/index'
 import Menu from './Menu/index'
 
-export { ChangePage, MapaSe, Headerr, Menu };
+export { ChangePage, Mapa, Headerr, Menu };

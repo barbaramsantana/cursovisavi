@@ -25,8 +25,6 @@ export const Container = styled.div`
       'textIndex'
       'imgIndex'
       'imgIndex'
-      'ObsIndex'
-      'imgIndex'
       'dataIndex';
   }
 
@@ -35,7 +33,6 @@ export const Container = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       'textIndex imgIndex'
-      'ObsIndex imgIndex'
       'dataIndex imgIndex';
   }
 `;

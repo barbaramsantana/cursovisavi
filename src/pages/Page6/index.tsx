@@ -1,7 +1,7 @@
 import React, {useEffect, useState } from 'react';
-
 import { ChangePage} from '../../components';
-import { Container, Title, Observacao } from './styles';
+
+import { Container, Title, Observacao} from './styles';
 
 import Api from '../../Api/api';
 import './styles.css';
@@ -21,7 +21,7 @@ interface Item{
   residencia: string;
 }
 
-const Page5: React.FC = () => {
+const Page6: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
 
     useEffect(() => {
@@ -33,30 +33,30 @@ const Page5: React.FC = () => {
     function colorMapOpacidade(valor){
             if(valor == 0){
                 return 0.0;
-            }else if(valor < 5){
-                return 0.1;
-            }else if(valor < 10){
-                return 0.2;
-            }else if(valor < 15){
-                return 0.3;
             }else if(valor < 20){
-                return 0.4;
-            }else if(valor < 25){
-                return 0.5;
+                return 0.1;
             }else if(valor < 30){
-                return 0.6;
-            }else if(valor < 35){
-                return 0.7;
+                return 0.2;
             }else if(valor < 40){
+                return 0.3;
+            }else if(valor < 50){
+                return 0.4;
+            }else if(valor < 60){
+                return 0.5;
+            }else if(valor < 70){
+                return 0.6;
+            }else if(valor < 80){
+                return 0.7;
+            }else if(valor < 90){
                 return 0.8;
-            }else if(valor < 45){
+            }else if(valor < 100){
                 return 0.9;
-            }else if(valor >= 45){
+            }else if(valor >= 100){
                 return 1.0;
             }
     }
     var numberConfirmed = items.map(function(item, indice){
-        return item.isolation;
+        return item.mortality;
     });
     var idCity = items.map(function(item, indice){
         return item.id_city;
@@ -64,13 +64,14 @@ const Page5: React.FC = () => {
     var dataCasos = items.map(function(item){
         return item.date;
     });
+  
   return (
     <Container>
-      <ChangePage name="before" page="/se/page4"/>
-      <ChangePage name="next" page="/se/page6"/>
+      <ChangePage name="before" page="/se/page5"/>
+      <ChangePage name="next"/>
 
-      <Title>Taxa de Isolamento Social</Title>
-      <div className="Mapas">
+      <Title>Taxa de Mortalidade</Title>
+        <div className="Mapas">
                 <Observacao>Valores do dia {dataCasos[0]}</Observacao> 
                     <svg className="ma" xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="500" height="587" viewBox="0 0 800 887" stroke-linecap="round" stroke-linejoin="round">
 
@@ -159,4 +160,4 @@ const Page5: React.FC = () => {
   );
 };
 
-export default Page5;
+export default Page6;

@@ -1,0 +1,28 @@
+:root {
+    --p-color: #3851C9;
+    --title-color: #11183D;
+    --text-color: #11183D;
+  }
+  .grafico{
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .pie{
+    width: 50%;
+    margin-top: 2rem;
+  }
+  .donut{
+    width: 50%;
+    margin-top: 2rem;
+  }
+  .line{
+    width: 50%;
+    margin-top: 2rem;
+  }
+  .bar{
+    width: 50%;
+    margin-top: 2rem;
+  }
+  h1{
+    font-size: 15px;
+  }

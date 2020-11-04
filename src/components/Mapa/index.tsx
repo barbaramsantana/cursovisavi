@@ -1,28 +1,36 @@
 import React, {useEffect, useState } from 'react';
-
-import { ChangePage} from '../../components';
-import { Container, Title, Observacao } from './styles';
-
 import Api from '../../Api/api';
 import './styles.css';
-
-//import Mapa from '../../components/Mapa/index';
+import {Observacao} from '../../pages/Index/styles';
 
 interface Item{
-  _id: string;
-  id_city: string
-  confirmed: number;
-  death: number;
-  lethality: number;
-  incidence: number;
-  mortality: number;
-  isolation: number;
-  date: string;
-  residencia: string;
+    _id: string;
+    id_city: string
+    confirmed: number;
+    death: number;
+    lethality: number;
+    incidence: number;
+    mortality: number;
+    isolation: number;
+    date: string;
+    residencia: string;
 }
-
-const Page5: React.FC = () => {
-  const [items, setItems] = useState<Item[]>([]);
+interface MapProps {
+    val1: number;
+    val2: number;
+    val3: number;
+    val4: number;
+    val5: number;
+    val6: number;
+    val7: number;
+    val8: number;
+    val9: number;
+    val10: number;
+    casocovid: string;
+  }
+const Mapa: React.FC<MapProps>=({val1, val2, val3, val4, val5, val6, val7, val8, val9, val10, casocovid})=>{
+    
+    const [items, setItems] = useState<Item[]>([]);
 
     useEffect(() => {
         Api.get('').then(response =>{
@@ -33,30 +41,45 @@ const Page5: React.FC = () => {
     function colorMapOpacidade(valor){
             if(valor == 0){
                 return 0.0;
-            }else if(valor < 5){
+            }else if(valor < val1){
                 return 0.1;
-            }else if(valor < 10){
+            }else if(valor < val2){
                 return 0.2;
-            }else if(valor < 15){
+            }else if(valor < val3){
                 return 0.3;
-            }else if(valor < 20){
+            }else if(valor < val4){
                 return 0.4;
-            }else if(valor < 25){
+            }else if(valor < val5){
                 return 0.5;
-            }else if(valor < 30){
+            }else if(valor < val6){
                 return 0.6;
-            }else if(valor < 35){
+            }else if(valor < val7){
                 return 0.7;
-            }else if(valor < 40){
+            }else if(valor < val8){
                 return 0.8;
-            }else if(valor < 45){
+            }else if(valor < val9){
                 return 0.9;
-            }else if(valor >= 45){
+            }else if(valor >= val10){
                 return 1.0;
             }
     }
-    var numberConfirmed = items.map(function(item, indice){
-        return item.isolation;
+    //Função para deixar mapas como componente e servir para todas as páginas;
+    var numberConfirmed = (function(){
+        var cas = "confirmed";
+        switch(cas){
+            case "confirmed":
+                console.log("aqui 1");
+                return numberConfirmeds;
+            case "death":
+                console.log("aqui 2");
+                return numberConfirmeds;
+        }
+    });
+    var numberConfirmeds = items.map(function(item, indice){
+        return item.confirmed;
+    });
+    var numberDeath = items.map(function(item, indice){
+        return item.death;
     });
     var idCity = items.map(function(item, indice){
         return item.id_city;
@@ -64,13 +87,8 @@ const Page5: React.FC = () => {
     var dataCasos = items.map(function(item){
         return item.date;
     });
-  return (
-    <Container>
-      <ChangePage name="before" page="/se/page4"/>
-      <ChangePage name="next" page="/se/page6"/>
-
-      <Title>Taxa de Isolamento Social</Title>
-      <div className="Mapas">
+        return(
+            <div className="Mapas">
                 <Observacao>Valores do dia {dataCasos[0]}</Observacao> 
                     <svg className="ma" xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="500" height="587" viewBox="0 0 800 887" stroke-linecap="round" stroke-linejoin="round">
 
@@ -155,8 +173,7 @@ const Page5: React.FC = () => {
                 )
 
             </div>
-    </Container>
-  );
-};
-
-export default Page5;
+            
+        );
+}
+export default Mapa;
