@@ -1,10 +1,11 @@
 import React, {useEffect, useState } from 'react';
 
 import { ChangePage} from '../../components';
-import { Container, Title, Observacao } from './styles';
+import { Container, Title, Observacao,Legenda, Topico, Mapa} from './styles';
 
 import Api from '../../Api/api';
 import './styles.css';
+import Legend from '../../components/Legenda/index';
 
 //import Mapa from '../../components/Mapa/index';
 
@@ -70,8 +71,8 @@ const Page4: React.FC = () => {
       <ChangePage name="next" page="/se/page5" />
 
       <Title>Casos por Densidade Demográfica</Title>
-      <div className="Mapas">
-                <Observacao>Valores do dia {dataCasos[0]}</Observacao> 
+      <Observacao>Valores do dia {dataCasos[0]}</Observacao>
+      <Mapa> 
                     <svg className="ma" xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="500" height="587" viewBox="0 0 800 887" stroke-linecap="round" stroke-linejoin="round">
 
                     <g className="municipios" id="28MUE250GC_SIR">
@@ -154,7 +155,9 @@ const Page4: React.FC = () => {
                     </svg>
                 )
 
-            </div>
+            </Mapa>
+            <Legend val1={0} val3={800} val4={900} val5={1000} val6={2000} val7={3000} val2={4000} val8={5000} val9={6000} val10={7000} ></Legend>
+
     </Container>
   );
 };

@@ -6,6 +6,7 @@ import Graficos from '../../components/Graficos';
 
 import Api from '../../Api/api';
 import './styles.css';
+import Legend from '../../components/Legenda/index';
 
 //import Mapa from '../../components/Mapa/index';
 
