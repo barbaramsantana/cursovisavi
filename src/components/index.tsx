@@ -1,7 +1,4 @@
 import ChangePage from './ChangePage';
-import Mapa from './Mapa';
-import Headerr from './Headerr/index';
-import Menu from './Menu/index';
-import Legend from './Legenda/index';
+import Map from './Map';
 
-export { ChangePage, Mapa, Headerr, Menu, Legend};
+export { ChangePage, Map };
