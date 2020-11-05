@@ -73,11 +73,10 @@ const Page7: React.FC = () => {
       <ChangePage name="next" />
 
       <Title>Número de Casos</Title>
-      <Observacao>ATENÇÃO: Os valores nos mapas estão em atualização</Observacao>
+      <Observacao>Valores do dia {dataCasos[0]}</Observacao> 
       <ContainerDados>
         <ContainerMap>
         <div className="Mapas">
-                <Observacao>Valores do dia {dataCasos[0]}</Observacao> 
                     <svg className="ma" xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="500" height="587" viewBox="0 0 800 887" stroke-linecap="round" stroke-linejoin="round">
 
                     <g className="municipios" id="28MUE250GC_SIR">

@@ -34,25 +34,25 @@ const Page5: React.FC = () => {
     function colorMapOpacidade(valor){
             if(valor == 0){
                 return 0.0;
-            }else if(valor < 5){
-                return 0.1;
             }else if(valor < 10){
-                return 0.2;
-            }else if(valor < 15){
-                return 0.3;
+                return 0.1;
             }else if(valor < 20){
-                return 0.4;
-            }else if(valor < 25){
-                return 0.5;
+                return 0.2;
             }else if(valor < 30){
-                return 0.6;
-            }else if(valor < 35){
-                return 0.7;
+                return 0.3;
             }else if(valor < 40){
+                return 0.4;
+            }else if(valor < 50){
+                return 0.5;
+            }else if(valor < 60){
+                return 0.6;
+            }else if(valor < 70){
+                return 0.7;
+            }else if(valor < 80){
                 return 0.8;
-            }else if(valor < 45){
+            }else if(valor < 90){
                 return 0.9;
-            }else if(valor >= 45){
+            }else if(valor >= 90){
                 return 1.0;
             }
     }
@@ -156,7 +156,7 @@ const Page5: React.FC = () => {
                 )
 
             </Mapa>
-            <Legend val1={0} val3={5} val4={10} val5={15} val6={20} val7={25} val2={30} val8={35} val9={40} val10={45} ></Legend>
+            <Legend val1={0} val3={10} val4={20} val5={30} val6={40} val7={50} val2={60} val8={70} val9={80} val10={90} ></Legend>
 
     </Container>
   );
