@@ -15,10 +15,10 @@ export const TextDate = styled.p`
 `;
 
 export const ContainerMap = styled.div`
-  path:hover {
-    fill: red;
-    opacity: 1;
-  }
+  
+`;
+export const Msg = styled.span`
+  display: none;
 `;
 
 export const ContainerLegend = styled.div`

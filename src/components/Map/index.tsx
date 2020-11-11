@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { IStateDTO } from '../../dtos/State';
+//import {Tooltip, Button} from 'react-bootstrap';
 
 import {
   Container,
@@ -9,7 +10,11 @@ import {
   Item,
   ItemImage,
   ItemText,
+  Msg,
 } from './styles';
+
+import './styless.css';
+
 
 interface IProps {
   cities: IStateDTO[] | undefined;
@@ -20,6 +25,7 @@ const Map: React.FC<IProps> = ({ cities, values }) => {
   const [groupsOpacity, setGroupsOpacity] = useState<number[]>([]);
   const [citiesOpacity, setCitiesOpacity] = useState<number[]>([]);
   const [showGroupsOpacity, setShowGroupsOpacity] = useState(false);
+  const [isShown, setIsShown] = useState(false);
 
   useEffect(() => {
     if (values && values.length !== 0) {
@@ -46,6 +52,31 @@ const Map: React.FC<IProps> = ({ cities, values }) => {
     }
   }, [values]);
 
+  //teste adicioinando div
+  function mouseOver(name){
+    var newDiv = document.createElement("div");
+    var newContent = document.createTextNode(name);
+    newDiv.className= "tooltip";
+    newDiv.appendChild(newContent);
+
+    var divTooltip = document.getElementById("tooltip");
+    document.body.insertBefore(newDiv, divTooltip);
+    /*
+    const headerToolbar = document.querySelector("");
+    if(!headerToolbar){
+      return;
+    }
+    headerToolbar.insertBefore(newDiv, headerToolbar.firstChild);
+    */
+  };
+  /*
+  //Teste com Bootstrap
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Teste
+    </Tooltip>
+  );
+  */
   return (
     <Container>
       <ContainerMap>
@@ -71,7 +102,10 @@ const Map: React.FC<IProps> = ({ cities, values }) => {
                   opacity={citiesOpacity[index]}
                   name={city.name}
                   d={city.geometry}
-                />
+                  onMouseOver={() => mouseOver(city.name)}
+                  //onMouseOver={() => renderTooltip(city.name)}
+              >
+              </path>
               ))}
           </g>
         </svg>

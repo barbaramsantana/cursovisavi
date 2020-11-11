@@ -11,7 +11,7 @@ import { getAPICovid } from '../../../utils/updateAPI';
 
 import { exampleState } from '../../../data/data_se';
 
-import { Container, Title, Content } from './styles';
+import { Container, Title, Content, Button } from './styles';
 
 interface IProps {
   cities: IStateDTO[];
@@ -24,6 +24,11 @@ const Page1: React.FC = () => {
   const [cities, setCities] = useState<IStateDTO[]>();
   const [citiesCovid, setCitiesCovid] = useState<ICovidDTO[]>([]);
   const [values, setValues] = useState<number[]>([]);
+
+  const option = [
+    {label: 'Numero de Casos'},
+    {label: ""},
+  ]
 
   const updateProps = useCallback(async () => {
     if (location.state) {
@@ -48,6 +53,13 @@ const Page1: React.FC = () => {
     });
     setValues(newConfirmed);
   }, [citiesCovid]);
+  const selectObitos = useCallback(() => {
+    const newConfirmed: number[] = [];
+    citiesCovid.forEach(cityCovid => {
+      newConfirmed.push(cityCovid.confirmed);
+    });
+    setValues(newConfirmed);
+  }, [citiesCovid]);
 
   useEffect(() => {
     updateProps();
@@ -57,15 +69,17 @@ const Page1: React.FC = () => {
     <Container>
       <ChangePage name="before" />
       <ChangePage name="next" page="/se/page2" cities={cities} />
-
-      <Title>Número de Casos</Title>
+      
+      <Title>{option[0].label}</Title>
+      <Button type="button" onClick={selectConfirmed}>
+          Confirmados
+        </Button>
+        <Button type="button" onClick={selectObitos}>
+          Obitos
+        </Button>
 
       <Content>
         <Map cities={cities} values={values} />
-
-        <button type="button" onClick={selectConfirmed}>
-          Confirmados
-        </button>
       </Content>
     </Container>
   );
