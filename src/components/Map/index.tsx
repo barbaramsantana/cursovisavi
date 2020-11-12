@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { IStateDTO } from '../../dtos/State';
-//import {Tooltip, Button} from 'react-bootstrap';
 
 import {
   Container,
   ContainerMap,
+  ContainerTooltip,
+  ContainerTooltipCity,
+  ContainerTooltipConfirmeds,
   ContainerLegend,
   Item,
   ItemImage,
   ItemText,
-  Msg,
 } from './styles';
-
-import './styless.css';
-
 
 interface IProps {
   cities: IStateDTO[] | undefined;
@@ -25,7 +23,17 @@ const Map: React.FC<IProps> = ({ cities, values }) => {
   const [groupsOpacity, setGroupsOpacity] = useState<number[]>([]);
   const [citiesOpacity, setCitiesOpacity] = useState<number[]>([]);
   const [showGroupsOpacity, setShowGroupsOpacity] = useState(false);
-  const [isShown, setIsShown] = useState(false);
+
+  const [citySelected, setCitySelected] = useState('Cidade');
+  const [confirmedsSelected, setConfirmedsSelected] = useState(0);
+
+  const handleSelectedCity = useCallback(
+    (index: number, value: number) => {
+      setCitySelected(cities ? cities[index].name : '');
+      setConfirmedsSelected(value);
+    },
+    [cities],
+  );
 
   useEffect(() => {
     if (values && values.length !== 0) {
@@ -52,64 +60,44 @@ const Map: React.FC<IProps> = ({ cities, values }) => {
     }
   }, [values]);
 
-  //teste adicioinando div
-  function mouseOver(name){
-    var newDiv = document.createElement("div");
-    var newContent = document.createTextNode(name);
-    newDiv.className= "tooltip";
-    newDiv.appendChild(newContent);
-
-    var divTooltip = document.getElementById("tooltip");
-    document.body.insertBefore(newDiv, divTooltip);
-    /*
-    const headerToolbar = document.querySelector("");
-    if(!headerToolbar){
-      return;
-    }
-    headerToolbar.insertBefore(newDiv, headerToolbar.firstChild);
-    */
-  };
-  /*
-  //Teste com Bootstrap
-  const renderTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props}>
-      Teste
-    </Tooltip>
-  );
-  */
   return (
     <Container>
       <ContainerMap>
         <svg
-          className="ma"
-          xmlns="http://www.w3.org/2000/svg"
           version="1.2"
-          baseProfile="tiny"
+          id="Layer_1"
+          x="0px"
+          y="0px"
           width="500"
           height="587"
+          xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 800 887"
-          strokeLinecap="round"
-          strokeLinejoin="round"
         >
-          <g className="municipios" id="28MUE250GC_SIR">
-            {cities &&
-              cities.map((city, index) => (
+          {cities &&
+            cities.map((city, idx) => (
+              <g key={city.id}>
                 <path
-                  key={city.id}
-                  id={city.id}
                   fill="#11183D"
                   stroke="#D3D3D3"
-                  opacity={citiesOpacity[index]}
+                  opacity={citiesOpacity[idx]}
                   name={city.name}
                   d={city.geometry}
-                  onMouseOver={() => mouseOver(city.name)}
-                  //onMouseOver={() => renderTooltip(city.name)}
-              >
-              </path>
-              ))}
-          </g>
+                  onMouseEnter={
+                    () => handleSelectedCity(idx, values ? values[idx] : 0)
+                    // eslint-disable-next-line react/jsx-curly-newline
+                  }
+                />
+              </g>
+            ))}
         </svg>
+        <ContainerTooltip>
+          <ContainerTooltipCity> {citySelected} </ContainerTooltipCity>
+          <ContainerTooltipConfirmeds>
+            Confirmados: {confirmedsSelected}
+          </ContainerTooltipConfirmeds>
+        </ContainerTooltip>
       </ContainerMap>
+
       {showGroupsOpacity && (
         <ContainerLegend>
           {groupsOpacity.map((groupOpacity, index) => (

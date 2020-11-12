@@ -25,10 +25,7 @@ const Page1: React.FC = () => {
   const [citiesCovid, setCitiesCovid] = useState<ICovidDTO[]>([]);
   const [values, setValues] = useState<number[]>([]);
 
-  const option = [
-    {label: 'Numero de Casos'},
-    {label: ""},
-  ]
+  const option = [{ label: 'Numero de Casos' }, { label: '' }];
 
   const updateProps = useCallback(async () => {
     if (location.state) {
@@ -53,12 +50,13 @@ const Page1: React.FC = () => {
     });
     setValues(newConfirmed);
   }, [citiesCovid]);
+
   const selectObitos = useCallback(() => {
-    const newConfirmed: number[] = [];
+    const newDeath: number[] = [];
     citiesCovid.forEach(cityCovid => {
-      newConfirmed.push(cityCovid.confirmed);
+      newDeath.push(cityCovid.death);
     });
-    setValues(newConfirmed);
+    setValues(newDeath);
   }, [citiesCovid]);
 
   useEffect(() => {
@@ -69,14 +67,14 @@ const Page1: React.FC = () => {
     <Container>
       <ChangePage name="before" />
       <ChangePage name="next" page="/se/page2" cities={cities} />
-      
+
       <Title>{option[0].label}</Title>
       <Button type="button" onClick={selectConfirmed}>
-          Confirmados
-        </Button>
-        <Button type="button" onClick={selectObitos}>
-          Obitos
-        </Button>
+        Confirmados
+      </Button>
+      <Button type="button" onClick={selectObitos}>
+        Obitos
+      </Button>
 
       <Content>
         <Map cities={cities} values={values} />

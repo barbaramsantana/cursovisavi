@@ -3136,9 +3136,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001020, caniuse-lite@^1.0.30001035:
-  version "1.0.30001035"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001035.tgz#2bb53b8aa4716b2ed08e088d4dc816a5fe089a1e"
-  integrity sha512-C1ZxgkuA4/bUEdMbU5WrGY4+UhMFFiXrgNAfxiMIqWgFTWfv/xsZCS2xEHT2LMq7xAZfuAnu6mcqyDl0ZR6wLQ==
+  version "1.0.30001157"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001157.tgz"
+  integrity sha512-gOerH9Wz2IRZ2ZPdMfBvyOi3cjaz4O4dgNwPGzx8EhqAs4+2IL/O+fJsbt+znSigujoZG8bVcIAUM/I/E5K3MA==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -9383,6 +9383,11 @@ react-overlays@^4.1.0:
     uncontrollable "^7.0.0"
     warning "^4.0.3"
 
+react-path-tooltip@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/react-path-tooltip/-/react-path-tooltip-1.0.9.tgz#e06333e0967f20a6e9fa306c2953bb43f5be69e6"
+  integrity sha512-UqEsP4Dc47tqDC13h/YH8uNY/1QeStl1Fe6s6jyqOIAhIPvVJsDxAnjvV9HtrOv0Uxk8f9ppZDj+Q83zbZHaPA==
+
 react-router-dom@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-5.2.0.tgz#9e65a4d0c45e13289e66c7b17c7e175d0ea15662"
@@ -9471,6 +9476,11 @@ react-scripts@3.4.3:
     workbox-webpack-plugin "4.3.1"
   optionalDependencies:
     fsevents "2.1.2"
+
+react-svg-tooltip@^0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/react-svg-tooltip/-/react-svg-tooltip-0.0.11.tgz#40c1359652ffbc209a62e8e5b8fb0d34882f2bac"
+  integrity sha512-iK7C7Ay5UCQL0Ert9xo1fQVjl+QplaA7VoR+pi+J7Uz25HqkyR3ksY+puHE2O7KVmuIxxre0e2hLWEr+jAv7XQ==
 
 react-transition-group@^4.4.1:
   version "4.4.1"

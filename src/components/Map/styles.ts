@@ -6,20 +6,17 @@ interface IItemImageProps {
 
 export const Container = styled.div``;
 
-export const TextDate = styled.p`
-  margin-bottom: 1rem;
-
-  font-size: 3rem;
-  text-align: center;
-  color: red;
-`;
-
 export const ContainerMap = styled.div`
-  
+  display: flex;
+
+  path:hover {
+    fill: black;
+  }
 `;
-export const Msg = styled.span`
-  display: none;
-`;
+
+export const ContainerTooltip = styled.div``;
+export const ContainerTooltipCity = styled.h1``;
+export const ContainerTooltipConfirmeds = styled.h2``;
 
 export const ContainerLegend = styled.div`
   width: 100%;
