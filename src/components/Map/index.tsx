@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import { IStateDTO } from '../../dtos/State';
+import Graficos from '../Graficos';
 
 import {
   Container,
@@ -12,6 +13,10 @@ import {
   Item,
   ItemImage,
   ItemText,
+  ContainerMapLegend,
+  ContainerGraph,
+  NameCity,
+  Observacao,
 } from './styles';
 
 interface IProps {
@@ -23,6 +28,10 @@ const Map: React.FC<IProps> = ({ cities, values }) => {
   const [groupsOpacity, setGroupsOpacity] = useState<number[]>([]);
   const [citiesOpacity, setCitiesOpacity] = useState<number[]>([]);
   const [showGroupsOpacity, setShowGroupsOpacity] = useState(false);
+  const [showGraphDetailed, setShowGraphDetailed] = useState(false);
+
+  const [citySelectedClick, setCitySelectedClick] = useState('Cidade');
+  const [idSelectedClick, setIdSelectedClick] = useState('Municipio');
 
   const [citySelected, setCitySelected] = useState('Cidade');
   const [confirmedsSelected, setConfirmedsSelected] = useState(0);
@@ -31,6 +40,25 @@ const Map: React.FC<IProps> = ({ cities, values }) => {
     (index: number, value: number) => {
       setCitySelected(cities ? cities[index].name : '');
       setConfirmedsSelected(value);
+    },
+    [cities],
+  );
+  const onClickMap = useCallback(
+    (index: number, idCity: string) => {
+      setCitySelectedClick(cities ? cities[index].name : '');
+      /*document.querySelectorAll('path')
+      .forEach(s => s.addEventListener('click', function(event) {
+        const vermelhoAtual = document.querySelector('path[style="stroke: #f00;"]');
+        if (vermelhoAtual){ s.style.fill = 'inherit';}
+        else{
+
+          s.style.stroke = '#f00';
+        }
+      })
+      );*/
+      setIdSelectedClick(idCity)
+      setShowGraphDetailed(false)
+      setShowGraphDetailed(true)
     },
     [cities],
   );
@@ -62,6 +90,23 @@ const Map: React.FC<IProps> = ({ cities, values }) => {
 
   return (
     <Container>
+    <ContainerMapLegend>
+      {showGroupsOpacity && (
+        <ContainerLegend>
+          {groupsOpacity.map((groupOpacity, index) => (
+            <Item key={groupOpacity}>
+              <ItemImage opacity={index * 0.1} />
+              <ItemText> {groupOpacity} </ItemText>
+            </Item>
+          ))}
+        </ContainerLegend>
+      )}
+      <ContainerTooltip>
+          <ContainerTooltipCity> {citySelected} </ContainerTooltipCity>
+          <ContainerTooltipConfirmeds>
+            Valor: {confirmedsSelected}
+          </ContainerTooltipConfirmeds>
+        </ContainerTooltip>
       <ContainerMap>
         <svg
           version="1.2"
@@ -77,8 +122,12 @@ const Map: React.FC<IProps> = ({ cities, values }) => {
             cities.map((city, idx) => (
               <g key={city.id}>
                 <path
+                  id={city.id}
                   fill="#11183D"
                   stroke="#D3D3D3"
+                  //stroke="#ffff"
+                  stroke-width="0.5rem"
+                  stroke-opacity="1"
                   opacity={citiesOpacity[idx]}
                   name={city.name}
                   d={city.geometry}
@@ -86,27 +135,21 @@ const Map: React.FC<IProps> = ({ cities, values }) => {
                     () => handleSelectedCity(idx, values ? values[idx] : 0)
                     // eslint-disable-next-line react/jsx-curly-newline
                   }
+                  onClick={
+                    () => onClickMap(idx, city.id)
+                  }
                 />
               </g>
             ))}
         </svg>
-        <ContainerTooltip>
-          <ContainerTooltipCity> {citySelected} </ContainerTooltipCity>
-          <ContainerTooltipConfirmeds>
-            Confirmados: {confirmedsSelected}
-          </ContainerTooltipConfirmeds>
-        </ContainerTooltip>
       </ContainerMap>
-
-      {showGroupsOpacity && (
-        <ContainerLegend>
-          {groupsOpacity.map((groupOpacity, index) => (
-            <Item key={groupOpacity}>
-              <ItemImage opacity={index * 0.1} />
-              <ItemText> {groupOpacity} </ItemText>
-            </Item>
-          ))}
-        </ContainerLegend>
+      </ContainerMapLegend>
+      {showGraphDetailed && (
+        <ContainerGraph>
+          <NameCity> {citySelectedClick} </NameCity>
+          <Observacao>Valores dos gráficos em atualização!</Observacao>
+          <Graficos/>
+        </ContainerGraph>
       )}
     </Container>
   );

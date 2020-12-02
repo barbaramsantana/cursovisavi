@@ -14,7 +14,7 @@ type FlexProps = {
     | '0.9'
     | '1.0';
 };
-export const Button = styled.button`
+export const Button = styled.a`
 
   flex: 1;
 
@@ -51,6 +51,9 @@ const appearFromRight = keyframes`
 
 export const Container = styled.div`
   animation: ${appearFromRight} 1s;
+  a:hover{
+    background: red;
+  }
 `;
 
 export const Title = styled.h1`
@@ -64,4 +67,15 @@ export const Content = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+export const Observacao = styled.p`
+  font-size: 3rem;
+  text-align: center;
+  color:red;
+
+  margin-bottom: 1rem;
+`;
+export const ContentButton = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 `;

@@ -4,24 +4,10 @@
     --text-color: #11183D;
   }
   .grafico{
-    display: flex;
-    flex-flow: row wrap;
-  }
-  .pie{
-    width: 50%;
-    margin-top: 2rem;
-  }
-  .donut{
-    width: 50%;
-    margin-top: 2rem;
-  }
-  .line{
-    width: 50%;
-    margin-top: 2rem;
-  }
-  .bar{
-    width: 50%;
-    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 50rem;
+    margin-left: 5rem;  
   }
   h1{
     font-size: 15px;

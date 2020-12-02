@@ -10,7 +10,6 @@ import {
   Page4,
   Page5,
   Page6,
-  Page7,
 } from '../pages/Covid';
 
 const Routes: React.FC = () => (
@@ -26,7 +25,6 @@ const Routes: React.FC = () => (
     <Route path="/se/page4" component={Page4} />
     <Route path="/se/page5" component={Page5} />
     <Route path="/se/page6" component={Page6} />
-    <Route path="/se/page7" component={Page7} />
   </Switch>
 );
 

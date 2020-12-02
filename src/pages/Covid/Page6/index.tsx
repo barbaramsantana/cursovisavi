@@ -75,7 +75,7 @@ const Page6: React.FC = () => {
   return (
     <Container>
       <ChangePage name="before" page="/se/page5" />
-      <ChangePage name="next" page="/se/page7"/>
+      <ChangePage name="next"/>
 
       <Title>Taxa de Mortalidade</Title>
       <Observacao>Valores do dia {dataCasos[0]}</Observacao>
