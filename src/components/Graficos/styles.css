@@ -4,8 +4,7 @@
     --text-color: #11183D;
   }
   .grafico{
-    display: grid;
-    grid-template-columns: 1fr;
+    display: inline;
     width: 50rem;
     margin-left: 5rem;  
   }

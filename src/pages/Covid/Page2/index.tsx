@@ -69,7 +69,6 @@ const Page2: React.FC = () => {
         </Button>
 
       <Content>
-        <Map cities={cities} values={values} />
       </Content>
     </Container>
   );

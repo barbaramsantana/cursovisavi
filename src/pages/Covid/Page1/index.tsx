@@ -6,16 +6,19 @@ import { ChangePage, Map } from '../../../components';
 
 import { IStateDTO } from '../../../dtos/State';
 import { ICovidDTO } from '../../../dtos/Covid';
+import {IMaxMinDTO} from '../../../dtos/MaxMin';
 
-import { getAPICovid } from '../../../utils/updateAPI';
+import { getAPICovid, getAPIMaxMin } from '../../../utils/updateAPI';
 
 import { exampleState } from '../../../data/data_se';
 
 import { Container, Title, Content, Button, Observacao, ContentButton } from './styles';
+import api from '../../../services/api';
 
 interface IProps {
   cities: IStateDTO[];
   citiesCovid: ICovidDTO[];
+  maxMin: IMaxMinDTO[];
 }
 
 const Page1: React.FC = () => {
@@ -23,6 +26,8 @@ const Page1: React.FC = () => {
 
   const [cities, setCities] = useState<IStateDTO[]>();
   const [citiesCovid, setCitiesCovid] = useState<ICovidDTO[]>([]);
+  const [maxMin, setMaxMin] = useState<IMaxMinDTO[]>([]);
+  const [maxMinValue, setMaxMinValue] = useState<number[]>();
   const [values, setValues] = useState<number[]>([]);
   const [numberTitle, setNumberTitle] = useState(0);
   //const [dateCovid, setDateCovid] = useState<string[]>([]);
@@ -42,6 +47,12 @@ const Page1: React.FC = () => {
         const { citiesCovidResponse } = await getAPICovid();
         setCitiesCovid(citiesCovidResponse);
       }
+      if (location.state.maxMin) {
+        setMaxMin(location.state.maxMin);
+      } else {
+        const { citiesMaxMinResponse } = await getAPIMaxMin();
+        setMaxMin(citiesMaxMinResponse);
+      }
     }
   }, []);
 
@@ -49,10 +60,35 @@ const Page1: React.FC = () => {
     const newConfirmed: number[] = [];
     citiesCovid.forEach(cityCovid => {
       newConfirmed.push(cityCovid.confirmed);
+      //console.log(citiesCovid);
     });
+    //const maxMinConfirmed: number[] = [];
+    console.log("oiee");
+    Object.keys(maxMin).forEach( item => {
+      console.log('aqui');
+      console.log(maxMin[item].max_confirm);
+    });
+
+    /*const newMaxMin: number[]= [];
+    Object.entries(maxMin).map((item) => {
+    //Object.entries(maxMin).forEach(item =>{
+      if(item[0] == "max_confirm"){
+        const max_confirmm = item[1];
+        console.log("max");
+        console.log(item[1]);
+        setMaxMinValue(max_confirmm);
+      }
+      console.log("leitura");
+      console.log(item[0]); 
+      console.log("rota");
+      console.log(maxMin);
+    });*/
     setValues(newConfirmed);
+    //setMaxMinValue(newMaxMin);
+    //console.log(maxMinValue);
     setNumberTitle(0);
-  }, [citiesCovid]);
+    //console.log(newConfirmed);
+  }, [citiesCovid, maxMin]);
 
   const selectDeath = useCallback(() => {
     const newConfirmed: number[] = [];
@@ -133,7 +169,7 @@ const Page1: React.FC = () => {
       </Button>
       </ContentButton>
       <Content>
-        <Map cities={cities} values={values} />
+        <Map cities={cities} values={values} maxMin={maxMinValue} />
       </Content>
     </Container>
   );

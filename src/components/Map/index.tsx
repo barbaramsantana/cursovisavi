@@ -22,13 +22,15 @@ import {
 interface IProps {
   cities: IStateDTO[] | undefined;
   values: number[] | undefined;
+  maxMin: number[] | undefined;
 }
 
-const Map: React.FC<IProps> = ({ cities, values }) => {
+const Map: React.FC<IProps> = ({ cities, values, maxMin }) => {
   const [groupsOpacity, setGroupsOpacity] = useState<number[]>([]);
   const [citiesOpacity, setCitiesOpacity] = useState<number[]>([]);
   const [showGroupsOpacity, setShowGroupsOpacity] = useState(false);
   const [showGraphDetailed, setShowGraphDetailed] = useState(false);
+  const maxMinV = maxMin;
 
   const [citySelectedClick, setCitySelectedClick] = useState('Cidade');
   const [idSelectedClick, setIdSelectedClick] = useState('Municipio');
@@ -146,9 +148,11 @@ const Map: React.FC<IProps> = ({ cities, values }) => {
       </ContainerMapLegend>
       {showGraphDetailed && (
         <ContainerGraph>
-          <NameCity> {citySelectedClick} </NameCity>
-          <Observacao>Valores dos gráficos em atualização!</Observacao>
-          <Graficos/>
+          <NameCity> {citySelected} </NameCity>
+          {
+            //<Graficos maxmin={maxMinV} muni={confirmedsSelected}/>
+          }
+          <Graficos maxmin={[4888, 60, 1273.67]} muni={confirmedsSelected}/>
         </ContainerGraph>
       )}
     </Container>

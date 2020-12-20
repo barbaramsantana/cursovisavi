@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import Chart from 'react-apexcharts';
+import api from '../../services/api';
 import './styles.css';
 
-class Graficos extends Component {
+interface Props {
+  maxmin: number[];
+  muni: number;
+}
+class Graficos extends React.Component<Props> {
 
   render() {
+    //const teste = this.props.maxm;
     return (
       <div className="grafico">
         {/*<div className="pie">
@@ -45,13 +51,14 @@ class Graficos extends Component {
             series={[
               {
                 name: 'Valor',
-                data: [40, 200, 400, 1000],
+                data: [this.props.maxmin[1], this.props.muni, this.props.maxmin[2], this.props.maxmin[0]],
               },
             ]}
             type="bar"
           />
         </div>
-          <h1>Número de casos confirmados acumulados</h1>
+          {/*
+            <h1>Número de casos confirmados acumulados</h1>
           <Chart
             options={{
               chart: {
@@ -79,6 +86,7 @@ class Graficos extends Component {
             ]}
             type="bar"
           />
+          */}
         </div>
       </div>
     );
