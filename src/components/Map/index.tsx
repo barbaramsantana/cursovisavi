@@ -16,7 +16,6 @@ import {
   ContainerMapLegend,
   ContainerGraph,
   NameCity,
-  Observacao,
 } from './styles';
 
 interface IProps {
@@ -48,7 +47,7 @@ const Map: React.FC<IProps> = ({ cities, values, maxMin }) => {
   const onClickMap = useCallback(
     (index: number, idCity: string) => {
       setCitySelectedClick(cities ? cities[index].name : '');
-      /*document.querySelectorAll('path')
+      /* document.querySelectorAll('path')
       .forEach(s => s.addEventListener('click', function(event) {
         const vermelhoAtual = document.querySelector('path[style="stroke: #f00;"]');
         if (vermelhoAtual){ s.style.fill = 'inherit';}
@@ -57,10 +56,10 @@ const Map: React.FC<IProps> = ({ cities, values, maxMin }) => {
           s.style.stroke = '#f00';
         }
       })
-      );*/
-      setIdSelectedClick(idCity)
-      setShowGraphDetailed(false)
-      setShowGraphDetailed(true)
+      ); */
+      setIdSelectedClick(idCity);
+      setShowGraphDetailed(false);
+      setShowGraphDetailed(true);
     },
     [cities],
   );
@@ -92,67 +91,65 @@ const Map: React.FC<IProps> = ({ cities, values, maxMin }) => {
 
   return (
     <Container>
-    <ContainerMapLegend>
-      {showGroupsOpacity && (
-        <ContainerLegend>
-          {groupsOpacity.map((groupOpacity, index) => (
-            <Item key={groupOpacity}>
-              <ItemImage opacity={index * 0.1} />
-              <ItemText> {groupOpacity} </ItemText>
-            </Item>
-          ))}
-        </ContainerLegend>
-      )}
-      <ContainerTooltip>
+      <ContainerMapLegend>
+        {showGroupsOpacity && (
+          <ContainerLegend>
+            {groupsOpacity.map((groupOpacity, index) => (
+              <Item key={groupOpacity}>
+                <ItemImage opacity={index * 0.1} />
+                <ItemText> {groupOpacity} </ItemText>
+              </Item>
+            ))}
+          </ContainerLegend>
+        )}
+        <ContainerTooltip>
           <ContainerTooltipCity> {citySelected} </ContainerTooltipCity>
           <ContainerTooltipConfirmeds>
             Valor: {confirmedsSelected}
           </ContainerTooltipConfirmeds>
         </ContainerTooltip>
-      <ContainerMap>
-        <svg
-          version="1.2"
-          id="Layer_1"
-          x="0px"
-          y="0px"
-          width="500"
-          height="587"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 800 887"
-        >
-          {cities &&
-            cities.map((city, idx) => (
-              <g key={city.id}>
-                <path
-                  id={city.id}
-                  fill="#11183D"
-                  stroke="#D3D3D3"
-                  //stroke="#ffff"
-                  stroke-width="0.5rem"
-                  stroke-opacity="1"
-                  opacity={citiesOpacity[idx]}
-                  name={city.name}
-                  d={city.geometry}
-                  onMouseEnter={
-                    () => handleSelectedCity(idx, values ? values[idx] : 0)
-                    // eslint-disable-next-line react/jsx-curly-newline
-                  }
-                  onClick={
-                    () => onClickMap(idx, city.id)
-                  }
-                />
-              </g>
-            ))}
-        </svg>
-      </ContainerMap>
+        <ContainerMap>
+          <svg
+            version="1.2"
+            id="Layer_1"
+            x="0px"
+            y="0px"
+            width="500"
+            height="587"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 800 887"
+          >
+            {cities &&
+              cities.map((city, idx) => (
+                <g key={city.id}>
+                  <path
+                    id={city.id}
+                    fill="#11183D"
+                    stroke="#D3D3D3"
+                    // stroke="#ffff"
+                    strokeWidth="0.5rem"
+                    strokeOpacity="1"
+                    opacity={citiesOpacity[idx]}
+                    name={city.name}
+                    d={city.geometry}
+                    onMouseEnter={
+                      () => handleSelectedCity(idx, values ? values[idx] : 0)
+                      // eslint-disable-next-line react/jsx-curly-newline
+                    }
+                    onClick={() => onClickMap(idx, city.id)}
+                  />
+                </g>
+              ))}
+          </svg>
+        </ContainerMap>
       </ContainerMapLegend>
       {showGraphDetailed && (
         <ContainerGraph>
           <NameCity> {citySelected} </NameCity>
           {
-            //<Graficos maxmin={maxMinV} muni={confirmedsSelected}/>
+            // <Graficos maxmin={maxMinV} muni={confirmedsSelected}/>
           }
-          <Graficos maxmin={[4888, 60, 1273.67]} muni={confirmedsSelected}/>
+          <Graficos maxmin={[4888, 60, 1273.67]} muni={confirmedsSelected} />
         </ContainerGraph>
       )}
     </Container>
