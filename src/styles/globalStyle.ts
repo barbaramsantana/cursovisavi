@@ -14,6 +14,10 @@ export default createGlobalStyle`
     --color-content-button-before-after-enabled: #11183D;
     --color-content-button-before-after-disabled: #11183D60;
 
+    --p-color: #3851C9;
+    --title-color: #11183D;
+    --text-color: #11183D;
+
     font-size: 60%;
   }
 

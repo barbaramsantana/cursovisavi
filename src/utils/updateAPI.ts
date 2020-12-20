@@ -1,8 +1,7 @@
 import api from '../services/api';
 
-import { ICovidDTO } from '../dtos/Covid';
+import { ICovidDTO, ICovidInfoResponseDTO } from '../dtos/Covid';
 import { IStateDTO } from '../dtos/State';
-import { IMaxMinDTO } from '../dtos/MaxMin';
 
 interface ServerResponseCovid {
   data: ICovidDTO[];
@@ -21,22 +20,21 @@ export async function getAPICovid(): Promise<getAPICovidResponse> {
 }
 
 interface ServerResponseMaxMin {
-  data: IMaxMinDTO[];
+  data: ICovidInfoResponseDTO;
 }
 interface getAPIMaxMinResponse {
-  citiesMaxMinResponse: IMaxMinDTO[];
+  citiesCovidInfoResponse: ICovidInfoResponseDTO;
 }
 
-export async function getAPIMaxMin(): Promise<getAPIMaxMinResponse> {
-  const response: ServerResponseMaxMin = await api.get<IMaxMinDTO[]>(
+export async function getAPICovidInfo(): Promise<getAPIMaxMinResponse> {
+  const response: ServerResponseMaxMin = await api.get<ICovidInfoResponseDTO>(
     '/covid/maxMin',
   );
 
-  const citiesMaxMinResponse: IMaxMinDTO[] = response.data;
-  console.log(citiesMaxMinResponse);
+  const citiesCovidInfoResponse: ICovidInfoResponseDTO = response.data;
 
   return {
-    citiesMaxMinResponse,
+    citiesCovidInfoResponse,
   };
 }
 

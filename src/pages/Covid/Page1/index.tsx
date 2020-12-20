@@ -1,31 +1,26 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useCallback, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { ChangePage, Map } from '../../../components';
+import { Map } from '../../../components';
 
 import { IStateDTO } from '../../../dtos/State';
-import { ICovidDTO } from '../../../dtos/Covid';
-import { IMaxMinDTO } from '../../../dtos/MaxMin';
+import {
+  ICovidDTO,
+  ICovidInfoResponseDTO,
+  ICovidInfoDTO,
+} from '../../../dtos/Covid';
 
-import { getAPICovid, getAPIMaxMin } from '../../../utils/updateAPI';
+import { getAPICovid, getAPICovidInfo } from '../../../utils/updateAPI';
 
 import { exampleState } from '../../../data/data_se';
+import { citiesCovidInfoExample } from '../../../utils/example';
 
-import {
-  Container,
-  Title,
-  Content,
-  Button,
-  Observacao,
-  ContentButton,
-} from './styles';
-import api from '../../../services/api';
+import { Container, Title, Content, Button, ContentButton } from './styles';
 
 interface IProps {
   cities: IStateDTO[];
   citiesCovid: ICovidDTO[];
-  maxMin: IMaxMinDTO[];
+  citiesCovidInfo: ICovidInfoResponseDTO;
 }
 
 const Page1: React.FC = () => {
@@ -33,11 +28,15 @@ const Page1: React.FC = () => {
 
   const [cities, setCities] = useState<IStateDTO[]>();
   const [citiesCovid, setCitiesCovid] = useState<ICovidDTO[]>([]);
-  const [maxMin, setMaxMin] = useState<IMaxMinDTO[]>([]);
-  const [maxMinValue, setMaxMinValue] = useState<number[]>();
+  const [citiesCovidInfo, setCitiesCovidInfo] = useState<ICovidInfoResponseDTO>(
+    citiesCovidInfoExample,
+  );
+  const [citiesCovidInfoSelected, setCitiesCovidInfoSelected] = useState<
+    ICovidInfoDTO
+  >({ min: 0, max: 0, med: 0 });
+
   const [values, setValues] = useState<number[]>([]);
   const [numberTitle, setNumberTitle] = useState(0);
-  // const [dateCovid, setDateCovid] = useState<string[]>([]);
 
   const option = [
     { label: 'Número de casos' },
@@ -61,48 +60,33 @@ const Page1: React.FC = () => {
         const { citiesCovidResponse } = await getAPICovid();
         setCitiesCovid(citiesCovidResponse);
       }
-      if (location.state.maxMin) {
-        setMaxMin(location.state.maxMin);
+      if (location.state.citiesCovidInfo) {
+        setCitiesCovidInfo(location.state.citiesCovidInfo);
       } else {
-        const { citiesMaxMinResponse } = await getAPIMaxMin();
-        setMaxMin(citiesMaxMinResponse);
+        const { citiesCovidInfoResponse } = await getAPICovidInfo();
+        setCitiesCovidInfo(citiesCovidInfoResponse);
       }
     }
-  }, []);
+  }, [location.state]);
 
   const selectConfirmed = useCallback(() => {
     const newConfirmed: number[] = [];
     citiesCovid.forEach(cityCovid => {
       newConfirmed.push(cityCovid.confirmed);
-      // console.log(citiesCovid);
     });
-    // const maxMinConfirmed: number[] = [];
-    console.log('oiee');
-    Object.keys(maxMin).forEach(item => {
-      console.log('aqui');
-      console.log(maxMin[item].max_confirm);
-    });
-
-    /* const newMaxMin: number[]= [];
-    Object.entries(maxMin).map((item) => {
-    //Object.entries(maxMin).forEach(item =>{
-      if(item[0] == "max_confirm"){
-        const max_confirmm = item[1];
-        console.log("max");
-        console.log(item[1]);
-        setMaxMinValue(max_confirmm);
-      }
-      console.log("leitura");
-      console.log(item[0]);
-      console.log("rota");
-      console.log(maxMin);
-    }); */
     setValues(newConfirmed);
-    // setMaxMinValue(newMaxMin);
-    // console.log(maxMinValue);
     setNumberTitle(0);
-    // console.log(newConfirmed);
-  }, [citiesCovid, maxMin]);
+    setCitiesCovidInfoSelected({
+      max: citiesCovidInfo.max_confirm,
+      min: citiesCovidInfo.min_confirm,
+      med: citiesCovidInfo.med_confirm,
+    });
+  }, [
+    citiesCovid,
+    citiesCovidInfo.max_confirm,
+    citiesCovidInfo.med_confirm,
+    citiesCovidInfo.min_confirm,
+  ]);
 
   const selectDeath = useCallback(() => {
     const newConfirmed: number[] = [];
@@ -111,7 +95,18 @@ const Page1: React.FC = () => {
     });
     setValues(newConfirmed);
     setNumberTitle(1);
-  }, [citiesCovid]);
+    setCitiesCovidInfoSelected({
+      max: citiesCovidInfo.max_death,
+      min: citiesCovidInfo.min_death,
+      med: citiesCovidInfo.med_death,
+    });
+  }, [
+    citiesCovid,
+    citiesCovidInfo.max_death,
+    citiesCovidInfo.med_death,
+    citiesCovidInfo.min_death,
+  ]);
+
   const selectLethality = useCallback(() => {
     const newConfirmed: number[] = [];
     citiesCovid.forEach(cityCovid => {
@@ -119,7 +114,18 @@ const Page1: React.FC = () => {
     });
     setValues(newConfirmed);
     setNumberTitle(2);
-  }, [citiesCovid]);
+    setCitiesCovidInfoSelected({
+      max: citiesCovidInfo.max_lethality,
+      min: citiesCovidInfo.min_lethality,
+      med: citiesCovidInfo.med_lethality,
+    });
+  }, [
+    citiesCovid,
+    citiesCovidInfo.max_lethality,
+    citiesCovidInfo.med_lethality,
+    citiesCovidInfo.min_lethality,
+  ]);
+
   const selectIncidence = useCallback(() => {
     const newConfirmed: number[] = [];
     citiesCovid.forEach(cityCovid => {
@@ -127,7 +133,18 @@ const Page1: React.FC = () => {
     });
     setValues(newConfirmed);
     setNumberTitle(3);
-  }, [citiesCovid]);
+    setCitiesCovidInfoSelected({
+      max: citiesCovidInfo.max_incidence,
+      min: citiesCovidInfo.min_incidence,
+      med: citiesCovidInfo.med_incidence,
+    });
+  }, [
+    citiesCovid,
+    citiesCovidInfo.max_incidence,
+    citiesCovidInfo.med_incidence,
+    citiesCovidInfo.min_incidence,
+  ]);
+
   const selectIsolation = useCallback(() => {
     const newConfirmed: number[] = [];
     citiesCovid.forEach(cityCovid => {
@@ -135,7 +152,18 @@ const Page1: React.FC = () => {
     });
     setValues(newConfirmed);
     setNumberTitle(4);
-  }, [citiesCovid]);
+    setCitiesCovidInfoSelected({
+      max: citiesCovidInfo.max_isolation,
+      min: citiesCovidInfo.min_isolation,
+      med: citiesCovidInfo.med_isolation,
+    });
+  }, [
+    citiesCovid,
+    citiesCovidInfo.max_isolation,
+    citiesCovidInfo.med_isolation,
+    citiesCovidInfo.min_isolation,
+  ]);
+
   const selectMortality = useCallback(() => {
     const newConfirmed: number[] = [];
     citiesCovid.forEach(cityCovid => {
@@ -143,14 +171,17 @@ const Page1: React.FC = () => {
     });
     setValues(newConfirmed);
     setNumberTitle(5);
-  }, [citiesCovid]);
-  const selectDate = useCallback(() => {
-    const newConfirmed: string[] = [];
-    citiesCovid.forEach(cityCovid => {
-      newConfirmed.push(cityCovid.date);
+    setCitiesCovidInfoSelected({
+      max: citiesCovidInfo.max_mortality,
+      min: citiesCovidInfo.min_mortality,
+      med: citiesCovidInfo.med_mortality,
     });
-    // setDateCovid(newConfirmed);
-  }, [citiesCovid]);
+  }, [
+    citiesCovid,
+    citiesCovidInfo.max_mortality,
+    citiesCovidInfo.med_mortality,
+    citiesCovidInfo.min_mortality,
+  ]);
 
   useEffect(() => {
     updateProps();
@@ -158,10 +189,6 @@ const Page1: React.FC = () => {
 
   return (
     <Container>
-      {
-        // <ChangePage name="before" />
-        // <ChangePage name="next" page="/se/page2" cities={cities} />
-      }
       <Title>{option[numberTitle].label}</Title>
       <ContentButton>
         <Button type="button" onClick={selectConfirmed}>
@@ -184,7 +211,11 @@ const Page1: React.FC = () => {
         </Button>
       </ContentButton>
       <Content>
-        <Map cities={cities} values={values} maxMin={maxMinValue} />
+        <Map
+          cities={cities}
+          values={values}
+          covidInfo={citiesCovidInfoSelected}
+        />
       </Content>
     </Container>
   );

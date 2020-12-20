@@ -11,7 +11,7 @@ import { getAPICovid } from '../../../utils/updateAPI';
 
 import { exampleState } from '../../../data/data_se';
 
-import { Container, Title, Content, Button} from './styles';
+import { Container, Title, Content, Button } from './styles';
 
 interface IProps {
   cities: IStateDTO[];
@@ -25,10 +25,7 @@ const Page2: React.FC = () => {
   const [citiesCovid, setCitiesCovid] = useState<ICovidDTO[]>([]);
   const [values, setValues] = useState<number[]>([]);
 
-  const option = [
-    {label: 'Numero de Óbitos'},
-    {label: ""},
-  ]
+  const option = [{ label: 'Numero de Óbitos' }, { label: '' }];
 
   const updateProps = useCallback(async () => {
     if (location.state) {
@@ -62,14 +59,13 @@ const Page2: React.FC = () => {
     <Container>
       <ChangePage name="before" page="/se/page1" />
       <ChangePage name="next" page="/se/page3" cities={cities} />
-      
-      <Title>{option[0].label}</Title>
-        <Button type="button" onClick={selectObitos}>
-          Obitos
-        </Button>
 
-      <Content>
-      </Content>
+      <Title>{option[0].label}</Title>
+      <Button type="button" onClick={selectObitos}>
+        Obitos
+      </Button>
+
+      <Content />
     </Container>
   );
 };

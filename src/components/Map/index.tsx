@@ -1,7 +1,10 @@
+/* eslint-disable react/jsx-curly-newline */
 import React, { useState, useEffect, useCallback } from 'react';
 
+import { Graphs } from '../index';
+
 import { IStateDTO } from '../../dtos/State';
-import Graficos from '../Graficos';
+import { ICovidInfoDTO } from '../../dtos/Covid';
 
 import {
   Container,
@@ -21,15 +24,14 @@ import {
 interface IProps {
   cities: IStateDTO[] | undefined;
   values: number[] | undefined;
-  maxMin: number[] | undefined;
+  covidInfo: ICovidInfoDTO;
 }
 
-const Map: React.FC<IProps> = ({ cities, values, maxMin }) => {
+const Map: React.FC<IProps> = ({ cities, values, covidInfo }) => {
   const [groupsOpacity, setGroupsOpacity] = useState<number[]>([]);
   const [citiesOpacity, setCitiesOpacity] = useState<number[]>([]);
   const [showGroupsOpacity, setShowGroupsOpacity] = useState(false);
   const [showGraphDetailed, setShowGraphDetailed] = useState(false);
-  const maxMinV = maxMin;
 
   const [citySelectedClick, setCitySelectedClick] = useState('Cidade');
   const [idSelectedClick, setIdSelectedClick] = useState('Municipio');
@@ -47,16 +49,6 @@ const Map: React.FC<IProps> = ({ cities, values, maxMin }) => {
   const onClickMap = useCallback(
     (index: number, idCity: string) => {
       setCitySelectedClick(cities ? cities[index].name : '');
-      /* document.querySelectorAll('path')
-      .forEach(s => s.addEventListener('click', function(event) {
-        const vermelhoAtual = document.querySelector('path[style="stroke: #f00;"]');
-        if (vermelhoAtual){ s.style.fill = 'inherit';}
-        else{
-
-          s.style.stroke = '#f00';
-        }
-      })
-      ); */
       setIdSelectedClick(idCity);
       setShowGraphDetailed(false);
       setShowGraphDetailed(true);
@@ -126,15 +118,13 @@ const Map: React.FC<IProps> = ({ cities, values, maxMin }) => {
                     id={city.id}
                     fill="#11183D"
                     stroke="#D3D3D3"
-                    // stroke="#ffff"
                     strokeWidth="0.5rem"
                     strokeOpacity="1"
                     opacity={citiesOpacity[idx]}
                     name={city.name}
                     d={city.geometry}
-                    onMouseEnter={
-                      () => handleSelectedCity(idx, values ? values[idx] : 0)
-                      // eslint-disable-next-line react/jsx-curly-newline
+                    onMouseEnter={() =>
+                      handleSelectedCity(idx, values ? values[idx] : 0)
                     }
                     onClick={() => onClickMap(idx, city.id)}
                   />
@@ -146,10 +136,7 @@ const Map: React.FC<IProps> = ({ cities, values, maxMin }) => {
       {showGraphDetailed && (
         <ContainerGraph>
           <NameCity> {citySelected} </NameCity>
-          {
-            // <Graficos maxmin={maxMinV} muni={confirmedsSelected}/>
-          }
-          <Graficos maxmin={[4888, 60, 1273.67]} muni={confirmedsSelected} />
+          <Graphs covidInfo={covidInfo} value={confirmedsSelected} />
         </ContainerGraph>
       )}
     </Container>

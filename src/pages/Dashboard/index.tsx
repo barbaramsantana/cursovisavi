@@ -4,8 +4,12 @@ import { Link } from 'react-router-dom';
 import indexImage from '../../assets/index.png';
 
 import { IStateDTO } from '../../dtos/State';
+import { ICovidDTO, ICovidInfoResponseDTO } from '../../dtos/Covid';
+
+import { getAPICovid, getAPICovidInfo } from '../../utils/updateAPI';
 
 import { exampleState } from '../../data/data_se';
+import { citiesCovidInfoExample } from '../../utils/example';
 
 import {
   Container,
@@ -15,19 +19,19 @@ import {
   ContainerButton,
   ButtonIcon,
 } from './styles';
-import { ICovidDTO } from '../../dtos/Covid';
-import { getAPICovid } from '../../utils/updateAPI';
 
 const Dashboard: React.FC = () => {
   const [cities] = useState<IStateDTO[]>(exampleState);
   const [citiesCovid, setCitiesCovid] = useState<ICovidDTO[]>([]);
+  const [citiesCovidInfo, setCitiesCovidInfo] = useState<ICovidInfoResponseDTO>(
+    citiesCovidInfoExample,
+  );
 
   const updateAPI = useCallback(async () => {
-    // const { citiesResponse } = await getAPIState('se');
-    // setCities(citiesResponse);
-
     const { citiesCovidResponse } = await getAPICovid();
+    const { citiesCovidInfoResponse } = await getAPICovidInfo();
     setCitiesCovid(citiesCovidResponse);
+    setCitiesCovidInfo(citiesCovidInfoResponse);
   }, []);
 
   useEffect(() => {
@@ -47,6 +51,7 @@ const Dashboard: React.FC = () => {
             state: {
               cities,
               citiesCovid,
+              citiesCovidInfo,
             },
           }}
         >
