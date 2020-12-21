@@ -74,6 +74,7 @@ const Page1: React.FC = () => {
     citiesCovid.forEach(cityCovid => {
       newConfirmed.push(cityCovid.confirmed);
     });
+    //console.log(newConfirmed);
     setValues(newConfirmed);
     setNumberTitle(0);
     setCitiesCovidInfoSelected({

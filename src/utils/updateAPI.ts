@@ -13,6 +13,7 @@ export async function getAPICovid(): Promise<getAPICovidResponse> {
   const response: ServerResponseCovid = await api.get<ICovidDTO[]>('/covid');
 
   const citiesCovidResponse: ICovidDTO[] = response.data;
+  //console.log(response.data);
 
   return {
     citiesCovidResponse,

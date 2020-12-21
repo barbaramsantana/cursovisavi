@@ -29,7 +29,7 @@ export const ContainerMap = styled.div`
 `;
 export const ContainerGraph = styled.div`
 display: grid;
-grid-template-rows: 1fr;
+grid-template-colum: 1fr;
 `;
 
 export const ContainerTooltip = styled.div`
@@ -54,6 +54,7 @@ export const NameCity = styled.div`
   font-size: 3.5rem;
   text-align: center;
   color: red; 
+  margin-botton: -2rem;
 `;
 
 export const ItemImage = styled.div<IItemImageProps>`

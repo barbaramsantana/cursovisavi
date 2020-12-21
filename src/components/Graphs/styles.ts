@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: inline;
-  width: 50rem;
+  width: 60rem;
+  height: 60rem;
   margin-left: 5rem;
 `;
 

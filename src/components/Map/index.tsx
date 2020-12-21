@@ -59,21 +59,33 @@ const Map: React.FC<IProps> = ({ cities, values, covidInfo }) => {
   useEffect(() => {
     if (values && values.length !== 0) {
       const newGroupsOpacity: number[] = [];
-      for (let i = 0; i < 8; i += 1) {
-        newGroupsOpacity.push(i * Math.max(...values));
+      let valuemax = Math.max(...values);
+      let valuemin = Math.min(...values);
+      for (let i = 0; i <8; i += 1) {
+        newGroupsOpacity.push(valuemin);
+        valuemin = valuemin+valuemax /8;
       }
+      newGroupsOpacity.push(valuemax);
+      console.log(newGroupsOpacity);
 
       const newCitiesOpacity: number[] = [];
       values.forEach(value => {
-        let opacity = 0;
-        for (let i = 0; i < 10; i += 1) {
-          if (value < newGroupsOpacity[i]) {
+        let opacity = 0.1;
+        for (let i = 0; i < 9; i += 1) {
+          if (value <= newGroupsOpacity[i]) {
+            //console.log(newGroupsOpacity[i]);
+            opacity = 0.1 * i;
+            break;
+          }else if (value >= newGroupsOpacity[i] && i==8) {
+            //console.log(newGroupsOpacity[i]);
             opacity = 0.1 * i;
             break;
           }
         }
         newCitiesOpacity.push(opacity);
+        //console.log(value);  
       });
+      //console.log(newCitiesOpacity);
 
       setGroupsOpacity(newGroupsOpacity);
       setCitiesOpacity(newCitiesOpacity);

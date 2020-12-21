@@ -33,7 +33,7 @@ const Graphs: React.FC<IProps> = ({ covidInfo, value }) => {
             series={[
               {
                 name: 'Valor',
-                data: [covidInfo.min, value, covidInfo.max, covidInfo.med],
+                data: [covidInfo.min, value, covidInfo.med, covidInfo.max],
               },
             ]}
             type="bar"
