@@ -204,9 +204,6 @@ const Page1: React.FC = () => {
         <Button type="button" onClick={selectIncidence}>
           Incidência
         </Button>
-        <Button type="button" onClick={selectIsolation}>
-          Isolamento
-        </Button>
         <Button type="button" onClick={selectMortality}>
           Mortalidade
         </Button>
