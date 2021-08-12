@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: grid;
+  display: inline;
   width: 50rem;
   height: 50rem;
   margin-left: 5rem;
-  margin-botton: -200rem;
 `;
 
 export const Line = styled.div``;

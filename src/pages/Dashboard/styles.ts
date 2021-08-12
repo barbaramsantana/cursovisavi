@@ -44,6 +44,12 @@ export const Title = styled.h1`
   font-size: 3.5rem;
   text-align: center;
 `;
+export const MapaText = styled.div`
+font-weight: 250;
+font-size: 3.5rem;
+text-align: center;
+color: red;
+`;
 export const Observacao = styled.p`
   grid-area: ObsIndex;
 
@@ -80,6 +86,27 @@ export const Image = styled.img`
     height: 39rem;
     width: 34.5rem;
   }
+`;
+type FlexProps = {
+  tamanho: number,
+}
+export const ContainerBalon = styled.div`
+  background: #BCC1D6;
+  border-radius: 15px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+&:after {
+  content: "";
+  position: absolute;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #BCC1D6;
+  bottom: -20px;
+  left: 20%;
+}
 `;
 
 export const ContainerButton = styled.div`

@@ -13,8 +13,8 @@ const appearFromRight = keyframes`
 export const Mapa = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: #F5F5F5;   
+  justify-content: center; 
+  background-color: #F5F5F5;  
 `;
 export const Container = styled.div`
   animation: ${appearFromRight} 1s;
@@ -36,6 +36,34 @@ export const Topico = styled.div<FlexProps>`
   background-color: #11183D;
   opacity: ${props => props.opacidade};
   justify-content: center;  
+`;
+export const Content = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const Button = styled.button`
+
+  flex: 1;
+
+  display: flex;
+  margin-left: 3rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+
+  height: 5rem;
+  width: 15rem;
+
+  border-radius: 0.5rem;
+
+  font-weight: 500;
+  font-size: 1.6rem;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--color-content-button-background);
+  color: var(--color-content-button-text);
+  box-shadow: 5px 5px 5px #00000080;
 `;
 export const Title = styled.h1`
   font-size: 3.5rem;

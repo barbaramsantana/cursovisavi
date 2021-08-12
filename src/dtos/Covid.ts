@@ -37,3 +37,37 @@ export interface ICovidInfoResponseDTO {
   min_lethality: number;
   min_mortality: number;
 }
+
+export interface IVacineDTO{
+  _id: string;
+  id_city: string;
+  populationTot: number;
+  totDosesSent_1: number;
+  totDosesSent_2: number;
+  totDosesApply_1: number;
+  totDosesApply_2: number;
+  date: string,
+  __v: number;
+}
+
+export interface IVacineGrap{
+  populationTot: number;
+  totDosesSent_1: number;
+  totDosesSent_2: number;
+  totDosesApply_1: number;
+  totDosesApply_2: number;
+  date: string,
+}
+
+export interface ILeitoDTO{
+  _id: string;
+  UF: string;
+  totAdmittedPrivate_UTI: number;
+  totAdmittedPrivate_infirmary: number;
+  totAdmittedSUS_UTI: number;
+  totAdmittedSUS_infirmary: number;
+  totHospitalBeds_available: number;
+  totHospitalBeds_occupied: number;
+  date: string,
+  __v: number;
+}

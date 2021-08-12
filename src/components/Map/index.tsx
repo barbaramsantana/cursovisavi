@@ -1,10 +1,12 @@
 /* eslint-disable react/jsx-curly-newline */
 import React, { useState, useEffect, useCallback } from 'react';
 
+import GraphsTime from '../GraphsTime';
+import GraphsVacina from '../GraphsVacina';
 import { Graphs } from '../index';
 
 import { IStateDTO } from '../../dtos/State';
-import { ICovidInfoDTO } from '../../dtos/Covid';
+import { ICovidInfoDTO, IVacineDTO } from '../../dtos/Covid';
 
 import {
   Container,
@@ -25,9 +27,12 @@ interface IProps {
   cities: IStateDTO[] | undefined;
   values: number[] | undefined;
   covidInfo: ICovidInfoDTO;
+  type: string;
+  idCCity: string[] | undefined;
+  vacineInfo: IVacineDTO;
 }
 
-const Map: React.FC<IProps> = ({ cities, values, covidInfo }) => {
+const Map: React.FC<IProps> = ({ cities, values, covidInfo, type, idCCity, vacineInfo }) => {
   const [groupsOpacity, setGroupsOpacity] = useState<number[]>([]);
   const [citiesOpacity, setCitiesOpacity] = useState<number[]>([]);
   const [showGroupsOpacity, setShowGroupsOpacity] = useState(false);
@@ -35,14 +40,17 @@ const Map: React.FC<IProps> = ({ cities, values, covidInfo }) => {
 
   const [citySelectedClick, setCitySelectedClick] = useState('Cidade');
   const [idSelectedClick, setIdSelectedClick] = useState('Municipio');
+  //const [idCSelectedClick, setIdCSelectedClick] = useState('Municipio');
 
   const [citySelected, setCitySelected] = useState('Cidade');
   const [confirmedsSelected, setConfirmedsSelected] = useState(0);
+  const [idcitySelected, setIdcitySelected] = useState('');
 
   const handleSelectedCity = useCallback(
-    (index: number, value: number) => {
+    (index: number, value: number, idCCit: string) => {
       setCitySelected(cities ? cities[index].name : '');
       setConfirmedsSelected(value);
+      setIdcitySelected(idCCit);
     },
     [cities],
   );
@@ -50,6 +58,7 @@ const Map: React.FC<IProps> = ({ cities, values, covidInfo }) => {
     (index: number, idCity: string) => {
       setCitySelectedClick(cities ? cities[index].name : '');
       setIdSelectedClick(idCity);
+      //setIdCSelectedClick(idCCity);
       setShowGraphDetailed(false);
       setShowGraphDetailed(true);
     },
@@ -136,7 +145,7 @@ const Map: React.FC<IProps> = ({ cities, values, covidInfo }) => {
                     name={city.name}
                     d={city.geometry}
                     onMouseEnter={() =>
-                      handleSelectedCity(idx, values ? values[idx] : 0)
+                      handleSelectedCity(idx, values ? values[idx] : 0, idCCity ? idCCity[idx] : '')
                     }
                     onClick={() => onClickMap(idx, city.id)}
                   />
@@ -148,7 +157,18 @@ const Map: React.FC<IProps> = ({ cities, values, covidInfo }) => {
       {showGraphDetailed && (
         <ContainerGraph>
           <NameCity> {citySelected} </NameCity>
-          <Graphs covidInfo={covidInfo} value={confirmedsSelected} />
+          {type == "vacina" &&(
+            <GraphsVacina value='casos' vacineInfo={vacineInfo}/>
+          )}
+          {type != "vacina" &&(
+            <Graphs covidInfo={covidInfo} value={confirmedsSelected} />
+          )}
+          {/*type == "confirmed" &&(
+            <GraphsTime value='casos' cityvalid={idSelectedClick} idcityreal={idcitySelected}/>
+            )}
+          {type == "death" &&(
+            <GraphsTime value='óbitos' cityvalid={idSelectedClick} idcityreal={idcitySelected}/>
+          )*/}
         </ContainerGraph>
       )}
     </Container>

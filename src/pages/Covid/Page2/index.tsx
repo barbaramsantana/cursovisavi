@@ -2,12 +2,14 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { ChangePage, Map } from '../../../components';
+//import { ChangePage, Gra } from '../../../components';
+import Graphsuti from '../../../components/Graphsuti';
+import { ChangePage } from '../../../components';
 
 import { IStateDTO } from '../../../dtos/State';
-import { ICovidDTO } from '../../../dtos/Covid';
+import { ICovidDTO, ILeitoDTO } from '../../../dtos/Covid';
 
-import { getAPICovid } from '../../../utils/updateAPI';
+import { getAPICovid, getAPILeito } from '../../../utils/updateAPI';
 
 import { exampleState } from '../../../data/data_se';
 
@@ -16,6 +18,8 @@ import { Container, Title, Content, Button } from './styles';
 interface IProps {
   cities: IStateDTO[];
   citiesCovid: ICovidDTO[];
+  citiesLeito: ILeitoDTO[];
+
 }
 
 const Page2: React.FC = () => {
@@ -24,6 +28,31 @@ const Page2: React.FC = () => {
   const [cities, setCities] = useState<IStateDTO[]>();
   const [citiesCovid, setCitiesCovid] = useState<ICovidDTO[]>([]);
   const [values, setValues] = useState<number[]>([]);
+
+  const [citiesLeito, setCitiesLeito] = useState<ILeitoDTO[]>([{_id: "",
+  UF: "",
+  totAdmittedPrivate_UTI: 0,
+  totAdmittedPrivate_infirmary: 0,
+  totAdmittedSUS_UTI: 0,
+  totAdmittedSUS_infirmary: 0,
+  totHospitalBeds_available: 0,
+  totHospitalBeds_occupied: 0,
+  date: "",
+  __v: 0,}]);
+
+  const [citiesLeitoInfoSelected, setCitiesLeitoInfoSelected] = useState<
+    ILeitoDTO
+  >({ _id: "",
+    UF: "",
+    totAdmittedPrivate_UTI: 0,
+    totAdmittedPrivate_infirmary: 0,
+    totAdmittedSUS_UTI: 0,
+    totAdmittedSUS_infirmary: 0,
+    totHospitalBeds_available: 0,
+    totHospitalBeds_occupied: 0,
+    date: "",
+    __v: 0, });
+
 
   const option = [{ label: 'Numero de Óbitos' }, { label: '' }];
 
@@ -40,6 +69,15 @@ const Page2: React.FC = () => {
         const { citiesCovidResponse } = await getAPICovid();
         setCitiesCovid(citiesCovidResponse);
       }
+      if (location.state.citiesLeito) {
+        setCitiesLeito(location.state.citiesLeito);
+        console.log(location.state.citiesLeito);
+      } else {
+        const { citiesLeitoResponse } = await getAPILeito();
+        setCitiesLeito(citiesLeitoResponse);
+        console.log(citiesLeitoResponse);
+      }
+
     }
   }, []);
 
@@ -58,12 +96,12 @@ const Page2: React.FC = () => {
   return (
     <Container>
       <ChangePage name="before" page="/se/page1" />
-      <ChangePage name="next" page="/se/page3" cities={cities} />
+      <ChangePage name="next" page="/se/page3" cities={cities} citiesLeito={citiesLeito} />
 
-      <Title>{option[0].label}</Title>
-      <Button type="button" onClick={selectObitos}>
-        Obitos
-      </Button>
+      <Title>Leitos de UTI</Title>
+      <div>
+        <Graphsuti value="UTI" citiesLeito={citiesLeito[0]}></Graphsuti>
+      </div>
 
       <Content />
     </Container>

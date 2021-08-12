@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: grid;
-  width: 50rem;
-  height: 50rem;
+display: grid;
   margin-left: 5rem;
-  margin-botton: -200rem;
+  align-items: center;
+  justify-content: center; 
 `;
 
 export const Line = styled.div``;
