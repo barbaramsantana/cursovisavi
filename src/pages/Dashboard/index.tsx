@@ -13,9 +13,9 @@ import raivaImage from '../../assets/angry.svg';
 import twitterImage from '../../assets/twitter.svg';
 
 import { IStateDTO } from '../../dtos/State';
-import { ICovidDTO, ICovidInfoResponseDTO, ILeitoDTO, IVacineDTO } from '../../dtos/Covid';
+import { ICovidDTO, ICovidInfoResponseDTO, ILeitoDTO, ISentimentoDTO, IVacineDTO } from '../../dtos/Covid';
 
-import { getAPICovid, getAPICovidInfo, getAPILeito, getAPIVacine } from '../../utils/updateAPI';
+import { getAPICovid, getAPICovidInfo, getAPILeito, getAPISentimento, getAPIVacine } from '../../utils/updateAPI';
 
 import { exampleState } from '../../data/data_se';
 import { citiesCovidInfoExample } from '../../utils/example';
@@ -44,15 +44,44 @@ const Dashboard: React.FC = () => {
 
   const [citiesLeito, setCitiesLeito] = useState<ILeitoDTO[]>([]);
 
+  const [citiesSentimento, setCitiesSentimento] = useState<ISentimentoDTO>({
+    sentimentFeliz:{
+      count: 0,
+      sentiment:[""],
+    },
+    sentimentMedo:{
+      count: 0,
+      sentiment:[""],
+    },
+    sentimentNeutro:{
+      count: 0,
+      sentiment:[""],
+    },
+    sentimentNojo:{
+      count: 0,
+      sentiment:[""],
+    },
+    sentimentRaiva:{
+      count: 0,
+      sentiment:[""],
+    },
+    sentimentTriste:{
+      count: 0,
+      sentiment:[""],
+    },
+  });
+
   const updateAPI = useCallback(async () => {
     const { citiesCovidResponse } = await getAPICovid();
     const { citiesCovidInfoResponse } = await getAPICovidInfo();
     const {citiesVacineResponse} = await getAPIVacine();
     const {citiesLeitoResponse} = await getAPILeito();
+    const {citiesSentimentoResponse} = await getAPISentimento();
     setCitiesVacine(citiesVacineResponse);
     setCitiesLeito(citiesLeitoResponse);
-    console.log("dash vacina:");
-    console.log(citiesVacineResponse);
+    setCitiesSentimento(citiesSentimentoResponse);
+    //console.log("dash vacina:");
+    //console.log(citiesVacineResponse);
     setCitiesCovid(citiesCovidResponse);
     setCitiesCovidInfo(citiesCovidInfoResponse);
   }, []);
@@ -65,7 +94,7 @@ const Dashboard: React.FC = () => {
   return (
     <Container>
       <Title>Acompanhe o sentimento brasileiro sobre o covid
-      <EmojiTT></EmojiTT>
+      <EmojiTT citiesSentimento={citiesSentimento}></EmojiTT>
       <div id="twitter">
       </div>
       </Title>

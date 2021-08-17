@@ -71,3 +71,30 @@ export interface ILeitoDTO{
   date: string,
   __v: number;
 }
+
+export interface ISentimentoDTO{
+  sentimentFeliz:{
+    count: number;
+    sentiment:[string];
+  };
+  sentimentMedo:{
+    count: number;
+    sentiment:[string];
+  };
+  sentimentNeutro:{
+    count: number;
+    sentiment:[string];
+  };
+  sentimentNojo:{
+    count: number;
+    sentiment:[string];
+  };
+  sentimentRaiva:{
+    count: number;
+    sentiment:[string];
+  };
+  sentimentTriste:{
+    count: number;
+    sentiment:[string];
+  };
+}

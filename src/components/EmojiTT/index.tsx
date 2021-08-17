@@ -16,6 +16,8 @@ import twitterImage from '../../assets/twitter.svg';
 
 //import api from '../../../services/api';
 import './styles.css';
+import { ISentimentoDTO } from '../../dtos/Covid';
+import { getAPISentimento } from '../../utils/updateAPI';
 
 interface Item {
   _id: string;
@@ -29,22 +31,61 @@ interface Item {
   date: string;
   residencia: string;
 }
+interface IProps {
+  citiesSentimento: ISentimentoDTO;
+}
 
-const EmojiTT: React.FC = () => {
+const EmojiTT: React.FC <IProps> = ({citiesSentimento}) => {
   //const [items, setItems] = useState<Item[]>([]);
+  const [citiesSentimentos, setCitiesSentimentos] = useState<ISentimentoDTO>({
+    sentimentFeliz:{
+      count: 0,
+      sentiment:["Feliz"],
+    },
+    sentimentMedo:{
+      count: 0,
+      sentiment:["Medo"],
+    },
+    sentimentNeutro:{
+      count: 0,
+      sentiment:["Neutro"],
+    },
+    sentimentNojo:{
+      count: 0,
+      sentiment:["Nojo"],
+    },
+    sentimentRaiva:{
+      count: 0,
+      sentiment:["Raiva"],
+    },
+    sentimentTriste:{
+      count: 0,
+      sentiment:["Triste"],
+    },
+  });
 
  /* useEffect(() => {
     api.get('/covid').then(response => {
       setItems(response.data);
     });
   }, []);*/
+  const updateAPI = useCallback(async () => {
+    const {citiesSentimentoResponse} = await getAPISentimento();
+    setCitiesSentimentos(citiesSentimentoResponse);
+    console.log("lendo sent");
+    console.log(citiesSentimentoResponse);
+  }, []);
 
-  
+  useEffect(() => {
+    updateAPI();
+  }, [updateAPI]);
+  console.log("sentimento chegou");
+  console.log(citiesSentimentos);
   const selectMedo = useCallback(() => {
     const element = (
     <ContainerBalon>
       <img src={twitterImage} alt="logo do twitter" width="20px" height="20px"/>
-      <h3>Muito Medo</h3>
+      <h3>{citiesSentimentos.sentimentMedo.sentiment[0]}</h3>
       <div>.</div>
     </ContainerBalon>
     );
@@ -54,7 +95,7 @@ const EmojiTT: React.FC = () => {
     const element = (
       <ContainerBalon>
       <img src={twitterImage} alt="logo do twitter" width="20px" height="20px"/>
-      <h3>Feliz por já está vacinada</h3>
+      <h3>{citiesSentimentos.sentimentFeliz.sentiment[0]}</h3>
       <div>.</div>
     </ContainerBalon>
     );
@@ -64,7 +105,7 @@ const EmojiTT: React.FC = () => {
     const element = (
       <ContainerBalon>
       <img src={twitterImage} alt="logo do twitter" width="20px" height="20px"/>
-      <h3>Teste Twitter Neutro</h3>
+      <h3>{citiesSentimentos.sentimentNeutro.sentiment[0]}</h3>
       <div>.</div>
     </ContainerBalon>
     );
@@ -74,18 +115,21 @@ const EmojiTT: React.FC = () => {
     const element = (
       <ContainerBalon>
       <img src={twitterImage} alt="logo do twitter" width="20px" height="20px"/>
-      <h3>O covid ataando cada vez mais</h3>
+      <h3>{citiesSentimentos.sentimentTriste.sentiment[0]}</h3>
       <div>.</div>
     </ContainerBalon>
     );
     ReactDOM.render(element, document.getElementById('twitter'));
   }, []);
   const selectNojo = useCallback(() => {
+    const valuesent = citiesSentimentos.sentimentNojo.sentiment[0];
+    console.log("value:");
+    console.log(citiesSentimentos.sentimentNojo);
     const element = (
       <ContainerBalon>
       <img src={twitterImage} alt="logo do twitter" width="20px" height="20px"/>
-      <h3>Teste Twitter Nojo</h3>
-      <div>.</div>
+      <h3>{valuesent}</h3>
+      <div>.</div>  
     </ContainerBalon>
     );
     ReactDOM.render(element, document.getElementById('twitter'));
@@ -94,7 +138,8 @@ const EmojiTT: React.FC = () => {
     const element = (
       <ContainerBalon>
       <img src={twitterImage} alt="logo do twitter" width="20px" height="20px"/>
-      <h3>Acaba logo covid</h3>
+      <h3>{citiesSentimentos.sentimentRaiva.sentiment[0]}</h3>
+      {console.log(citiesSentimentos.sentimentRaiva.sentiment[0])}
       <div>.</div>
     </ContainerBalon>
     );

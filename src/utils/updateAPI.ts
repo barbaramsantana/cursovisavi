@@ -1,6 +1,6 @@
 import api from '../services/api';
 
-import { ICovidDTO, ICovidInfoResponseDTO, ILeitoDTO, IVacineDTO } from '../dtos/Covid';
+import { ICovidDTO, ICovidInfoResponseDTO, ILeitoDTO, ISentimentoDTO, IVacineDTO } from '../dtos/Covid';
 import { IStateDTO } from '../dtos/State';
 
 interface ServerResponseCovid {
@@ -88,5 +88,22 @@ export async function getAPILeito(): Promise<getAPILeitoResponse> {
 
   return {
     citiesLeitoResponse,
+  };
+}
+
+interface ServerResponseSentimento {
+  data: ISentimentoDTO;
+}
+interface getAPISentimentoResponse {
+  citiesSentimentoResponse: ISentimentoDTO;
+}
+export async function getAPISentimento(): Promise<getAPISentimentoResponse> {
+  const response: ServerResponseSentimento = await api.get<ISentimentoDTO>('/analisesSentimento/sentimentoObj');
+
+  const citiesSentimentoResponse: ISentimentoDTO = response.data;
+  console.log(response.data);
+
+  return {
+    citiesSentimentoResponse,
   };
 }
