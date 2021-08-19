@@ -226,7 +226,7 @@ const Dashboard: React.FC = () => {
 }   <div>
 
       <MapaText>Encontre mapas com os dados do Covid-19 em Sergipe clicando no estado </MapaText>
-      <div>Os dados utilizados foram obtidos pelo Governo do Estado de Sergipe por meio do site <a href="https://todoscontraocorona.net.br/">Todos Contra o Corona</a> </div>
+      <div>Os dados utilizados nesse trabalho foram obtidos pelo Governo do Estado de Sergipe por meio do site <a href="https://todoscontraocorona.net.br/">Todos Contra o Corona.</a> </div>
       <div>Ícones feitos por <a href="https://www.flaticon.com/br/autores/roundicons" title="Roundicons">Roundicons</a> from <a href="https://www.flaticon.com/br/" title="Flaticon">www.flaticon.com</a></div>
 </div>
     </Container>
