@@ -50,14 +50,17 @@ export const Observacao = styled.p`
 
   margin-bottom: 1rem;
 `;
-export const ImageEmoji = styled.img`
+type FlexProp ={
+  tamEmoji?: number,
+}
+export const ImageEmoji = styled.img<FlexProp>`
   @media screen and (max-width: 780px) {
-    height: 6rem;
-    width: 6rem;
+    height: ${props => props.tamEmoji}rem;
+    width: ${props => props.tamEmoji}rem;
   }
   @media screen and (min-width: 781px) {
-    height: 7rem;
-    width: 7rem;
+    height: ${props => props.tamEmoji}rem;
+    width: ${props => props.tamEmoji}rem;
   }
   &:hover {
     filter:drop-shadow(0 0 10px #11183D);

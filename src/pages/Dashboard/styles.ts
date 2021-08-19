@@ -13,6 +13,11 @@ const appearFromTop = keyframes`
   }
 `;
 
+export const ContainerTwitter = styled.div`
+font-size: 1.5rem;
+text-align: center;
+`;
+
 export const Container = styled.div`
   display: grid;
 

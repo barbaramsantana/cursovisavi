@@ -30,9 +30,11 @@ import {
   ContainerBalon,
   Observacao,
   MapaText,
+  ContainerTwitter,
 } from './styles';
 import MapBrazil from '../../components/MapBrazil';
 import EmojiTT from '../../components/EmojiTT';
+import { ImageEmoji } from '../../components/EmojiTT/styles';
 
 const Dashboard: React.FC = () => {
   const [cities] = useState<IStateDTO[]>(exampleState);
@@ -43,6 +45,14 @@ const Dashboard: React.FC = () => {
   const [citiesVacine, setCitiesVacine] = useState<IVacineDTO[]>([]);
 
   const [citiesLeito, setCitiesLeito] = useState<ILeitoDTO[]>([]);
+
+  const [tamEmoji, setTamEmoji] = useState<number>(0);
+  const [tamFeliz, setTamFeliz] = useState<number>(0);
+  const [tamMedo, setTamMedo] = useState<number>(0);
+  const [tamNeutro, setTamNeutro] = useState<number>(0);
+  const [tamTriste, setTamTriste] = useState<number>(0);
+  const [tamNojo, setTamNojo] = useState<number>(0);
+  const [tamRaiva, setTamRaiva] = useState<number>(0);
 
   const [citiesSentimento, setCitiesSentimento] = useState<ISentimentoDTO>({
     sentimentFeliz:{
@@ -79,9 +89,13 @@ const Dashboard: React.FC = () => {
     const {citiesSentimentoResponse} = await getAPISentimento();
     setCitiesVacine(citiesVacineResponse);
     setCitiesLeito(citiesLeitoResponse);
+    setTamFeliz(citiesSentimentoResponse.sentimentFeliz.count);
+    setTamMedo(citiesSentimentoResponse.sentimentMedo.count);
+    setTamRaiva(citiesSentimentoResponse.sentimentRaiva.count);
+    setTamNeutro(citiesSentimentoResponse.sentimentNeutro.count);
+    setTamTriste(citiesSentimentoResponse.sentimentTriste.count);
+    setTamNojo(citiesSentimentoResponse.sentimentNojo.count);
     setCitiesSentimento(citiesSentimentoResponse);
-    //console.log("dash vacina:");
-    //console.log(citiesVacineResponse);
     setCitiesCovid(citiesCovidResponse);
     setCitiesCovidInfo(citiesCovidInfoResponse);
   }, []);
@@ -90,13 +104,101 @@ const Dashboard: React.FC = () => {
     updateAPI();
   }, [updateAPI]);
 
+  const selectMedo = useCallback(async () => {
+      const {citiesSentimentoResponse} = await getAPISentimento();
+      const valuecount = citiesSentimentoResponse.sentimentMedo.count;
+      const valuealeatory = Math.floor(Math.random() * valuecount);
+      setTamEmoji(valuecount);
+      const element = (
+      <ContainerBalon>
+        <img src={twitterImage} alt="logo do twitter" width="20px" height="20px"/>
+        <h3>{citiesSentimentoResponse.sentimentMedo.sentiment[valuealeatory]}</h3>
+        <div>.</div>
+      </ContainerBalon>
+      );
+      ReactDOM.render(element, document.getElementById('twitter'));
+    }, []);
+  const selectFeliz = useCallback(async () => {
+    const {citiesSentimentoResponse} = await getAPISentimento();
+    const valuecount = citiesSentimentoResponse.sentimentFeliz.count;
+      const valuealeatory = Math.floor(Math.random() * valuecount);
+    const element = (
+      <ContainerBalon>
+      <img src={twitterImage} alt="logo do twitter" width="20px" height="20px"/>
+      <h3>{citiesSentimentoResponse.sentimentFeliz.sentiment[valuealeatory]}</h3>
+      <div>.</div>
+    </ContainerBalon>
+    );
+    ReactDOM.render(element, document.getElementById('twitter'));
+  }, []);
+  const selectNeutro = useCallback(async () => {
+    const {citiesSentimentoResponse} = await getAPISentimento();
+    const valuecount = citiesSentimentoResponse.sentimentNeutro.count;
+      const valuealeatory = Math.floor(Math.random() * valuecount);
+    const element = (
+      <ContainerBalon>
+      <img src={twitterImage} alt="logo do twitter" width="20px" height="20px"/>
+      <h3>{citiesSentimentoResponse.sentimentNeutro.sentiment[valuealeatory]}</h3>
+      <div>.</div>
+    </ContainerBalon>
+    );
+    ReactDOM.render(element, document.getElementById('twitter'));
+  }, []);
+  const selectTriste = useCallback(async () => {
+    const {citiesSentimentoResponse} = await getAPISentimento();
+    const valuecount = citiesSentimentoResponse.sentimentTriste.count;
+      const valuealeatory = Math.floor(Math.random() * valuecount);
+    const element = (
+      <ContainerBalon>
+      <img src={twitterImage} alt="logo do twitter" width="20px" height="20px"/>
+      <h3>{citiesSentimentoResponse.sentimentTriste.sentiment[valuealeatory]}</h3>
+      <div>.</div>
+    </ContainerBalon>
+    );
+    ReactDOM.render(element, document.getElementById('twitter'));
+  }, []);
+  const selectNojo = useCallback(async () => {
+    const {citiesSentimentoResponse} = await getAPISentimento();
+    const valuecount = citiesSentimentoResponse.sentimentNojo.count;
+      const valuealeatory = Math.floor(Math.random() * valuecount);
+    const element = (
+      <ContainerBalon>
+      <img src={twitterImage} alt="logo do twitter" width="20px" height="20px"/>
+      <h3>{citiesSentimentoResponse.sentimentNojo.sentiment[valuealeatory]}</h3>
+      <div>.</div>  
+    </ContainerBalon>
+    );
+    ReactDOM.render(element, document.getElementById('twitter'));
+  }, []);
+  const selectRaiva = useCallback(async () => {
+    const {citiesSentimentoResponse} = await getAPISentimento();
+    const valuecount = citiesSentimentoResponse.sentimentRaiva.count;
+      const valuealeatory = Math.floor(Math.random() * valuecount);
+    const element = (
+      <ContainerBalon>
+      <img src={twitterImage} alt="logo do twitter" width="20px" height="20px"/>
+      <h3>{citiesSentimentoResponse.sentimentRaiva.sentiment[valuealeatory]}</h3>
+      <div>.</div>
+    </ContainerBalon>
+    );
+    ReactDOM.render(element, document.getElementById('twitter'));
+  }, []);
 
   return (
     <Container>
       <Title>Acompanhe o sentimento brasileiro sobre o covid
-      <EmojiTT citiesSentimento={citiesSentimento}></EmojiTT>
-      <div id="twitter">
-      </div>
+      <ContainerTwitter id="twitter">
+      </ContainerTwitter>
+      <Container>
+      <div>
+          <ImageEmoji tamEmoji={(tamMedo+1)/10} src={medoImage} alt="emoji" onClick={selectMedo} />
+          <ImageEmoji tamEmoji={(tamFeliz+1)/10} src={felizImage} alt="emoji" onClick={selectFeliz}/>
+          <ImageEmoji tamEmoji={(tamNeutro+1)/10} src={neutroImage} alt="emoji" onClick={selectNeutro}/>
+          <ImageEmoji tamEmoji={(tamTriste+1)/10} src={tristeImage} alt="emoji" onClick={selectTriste}/>
+          <ImageEmoji tamEmoji={(tamNojo+1)/10} src={nojoImage} alt="emoji" onClick={selectNojo}/>
+          <ImageEmoji tamEmoji={(tamRaiva+1)/10} src={raivaImage} alt="emoji" onClick={selectRaiva}/>
+        </div>
+    </Container>
       </Title>
       <ContainerButton>
       </ContainerButton>

@@ -18,6 +18,7 @@ import twitterImage from '../../assets/twitter.svg';
 import './styles.css';
 import { ISentimentoDTO } from '../../dtos/Covid';
 import { getAPISentimento } from '../../utils/updateAPI';
+import api from '../../services/api';
 
 interface Item {
   _id: string;
@@ -64,21 +65,28 @@ const EmojiTT: React.FC <IProps> = ({citiesSentimento}) => {
     },
   });
 
- /* useEffect(() => {
-    api.get('/covid').then(response => {
-      setItems(response.data);
-    });
-  }, []);*/
-  const updateAPI = useCallback(async () => {
-    const {citiesSentimentoResponse} = await getAPISentimento();
-    setCitiesSentimentos(citiesSentimentoResponse);
-    console.log("lendo sent");
-    console.log(citiesSentimentoResponse);
+ useEffect(() => {
+   async function updateAPI() {
+     const response = await api.get('/analisesSentimento/sentimentoObj')
+       setCitiesSentimentos(response.data);
+       console.log("api:");
+       console.log(response.data);
+       console.log(citiesSentimentos);
+   }
+   updateAPI();
   }, []);
+  
 
-  useEffect(() => {
+  /*useEffect(() => {
+   async function updateAPI () {
+      const {citiesSentimentoResponse} = await getAPISentimento();
+      setCitiesSentimentos(citiesSentimentoResponse);
+      console.log("lendo sent");
+      console.log(citiesSentimentoResponse);
+    }
     updateAPI();
-  }, [updateAPI]);
+  },[]);*/
+
   console.log("sentimento chegou");
   console.log(citiesSentimentos);
   const selectMedo = useCallback(() => {
