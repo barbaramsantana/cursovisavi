@@ -110,7 +110,11 @@ const Map: React.FC<IProps> = ({ cities, values, covidInfo, type, idCCity, vacin
             {groupsOpacity.map((groupOpacity, index) => (
               <Item key={groupOpacity}>
                 <ItemImage opacity={index * 0.1} />
+<<<<<<< HEAD
                 <ItemText> {groupOpacity.toFixed(0)} </ItemText>
+=======
+                <ItemText> {groupOpacity.toFixed(2)} </ItemText>
+>>>>>>> a6456346cbc6d3414440ef6943c818be3d4d307e
               </Item>
             ))}
           </ContainerLegend>

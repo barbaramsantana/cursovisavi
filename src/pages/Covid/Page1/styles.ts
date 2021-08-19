@@ -77,5 +77,9 @@ export const Observacao = styled.p`
 `;
 export const ContentButton = styled.div`
   display: grid;
+<<<<<<< HEAD
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+=======
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+>>>>>>> a6456346cbc6d3414440ef6943c818be3d4d307e
 `;
