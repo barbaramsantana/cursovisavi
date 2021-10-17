@@ -22,6 +22,7 @@ import {
   ContainerGraph,
   NameCity,
 } from './styles';
+import { getAPIState } from '../../utils/updateAPI';
 
 interface IProps {
   cities: IStateDTO[] | undefined;
@@ -45,6 +46,7 @@ const Map: React.FC<IProps> = ({ cities, values, covidInfo, type, idCCity, vacin
   const [citySelected, setCitySelected] = useState('Cidade');
   const [confirmedsSelected, setConfirmedsSelected] = useState(0);
   const [idcitySelected, setIdcitySelected] = useState('');
+  const [idcity, setIdcity] = useState('');
 
   const handleSelectedCity = useCallback(
     (index: number, value: number, idCCit: string) => {
@@ -110,11 +112,6 @@ const Map: React.FC<IProps> = ({ cities, values, covidInfo, type, idCCity, vacin
             {groupsOpacity.map((groupOpacity, index) => (
               <Item key={groupOpacity}>
                 <ItemImage opacity={index * 0.1} />
-<<<<<<< HEAD
-                <ItemText> {groupOpacity.toFixed(0)} </ItemText>
-=======
-                <ItemText> {groupOpacity.toFixed(2)} </ItemText>
->>>>>>> a6456346cbc6d3414440ef6943c818be3d4d307e
               </Item>
             ))}
           </ContainerLegend>
@@ -154,7 +151,28 @@ const Map: React.FC<IProps> = ({ cities, values, covidInfo, type, idCCity, vacin
                     onClick={() => onClickMap(idx, city.id)}
                   />
                 </g>
-              ))}
+                  ))}
+                  {
+                   /* cities && idCCity?.map((city, idx)=>(
+                      setIdcity(getAPIState(idCCity.id));
+                      <g key={city.id}>
+                      <path
+                        id={city.id}
+                        fill="#11183D"
+                        stroke="#D3D3D3"
+                        strokeWidth="0.5rem"
+                        strokeOpacity="1"
+                        opacity={citiesOpacity[idx]}
+                        name={idcity.name}
+                        d={idcity.geometry}
+                        onMouseEnter={() =>
+                          handleSelectedCity(idx, values ? values[idx] : 0, idCCity ? idCCity[idx] : '')
+                        }
+                        onClick={() => onClickMap(idx, city.id)}
+                      />
+                    </g>
+                    ));*/
+                  }
           </svg>
         </ContainerMap>
       </ContainerMapLegend>
